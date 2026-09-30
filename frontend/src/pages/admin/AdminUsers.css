@@ -1,0 +1,162 @@
+.admin-users-page {
+    min-height: calc(100vh - 72px);
+    padding: 40px;
+    background: #101015;
+    color: #ffffff;
+}
+
+.users-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    gap: 20px;
+}
+
+.users-header h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.users-header p {
+    margin: 0;
+    color: #9696a3;
+    font-size: 14px;
+}
+
+.user-count {
+    padding: 8px 14px;
+    border: 1px solid #302b3e;
+    border-radius: 20px;
+    background: #1d1a27;
+    color: #a78bfa;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.users-table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #292932;
+    border-radius: 14px;
+    background: #18181f;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.users-table th,
+.users-table td {
+    padding: 17px 20px;
+    text-align: left;
+    border-bottom: 1px solid #292932;
+}
+
+.users-table th {
+    background: #1d1d25;
+    color: #9696a3;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.users-table td {
+    color: #d6d6de;
+    font-size: 14px;
+}
+
+.users-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.users-table tbody tr {
+    transition: 0.2s ease;
+}
+
+.users-table tbody tr:hover {
+    background: #1e1e27;
+}
+
+.user-name {
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.admin-role {
+    background: #29213d;
+    color: #a78bfa;
+}
+
+.user-role {
+    background: #20252b;
+    color: #9ba8b5;
+}
+
+.empty-state {
+    padding: 70px 20px;
+    text-align: center;
+    border: 1px solid #292932;
+    border-radius: 14px;
+    background: #18181f;
+}
+
+.empty-state h3 {
+    margin: 0 0 8px;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.empty-state p {
+    margin: 0;
+    color: #9696a3;
+    font-size: 14px;
+}
+
+.error-message {
+    color: #f08b8b;
+}
+
+@media (max-width: 900px) {
+    .admin-users-page {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-users-page {
+        min-height: calc(100vh - 72px);
+        padding: 24px 20px;
+    }
+
+    .users-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .users-header h1 {
+        font-size: 26px;
+    }
+
+    .users-table-container {
+        border-radius: 12px;
+    }
+
+    .users-table {
+        min-width: 700px;
+    }
+}

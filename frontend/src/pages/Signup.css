@@ -1,0 +1,288 @@
+* {
+    box-sizing: border-box;
+}
+
+.signup-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+
+    background: linear-gradient(145deg,
+            #11121d 0%,
+            #3f458a 45%,
+            #e9d985 130%);
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Main card */
+
+.signup-card {
+    width: 100%;
+    max-width: 650px;
+
+    padding: 42px 48px;
+
+    background: gradient(90deg,
+            white,
+            #3f458a,
+            #e9d985);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.35);
+
+    position: relative;
+    overflow: hidden;
+}
+
+/* Gradient accent at the top */
+
+.signup-card::before {
+    content: "";
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 6px;
+}
+
+/* Header */
+
+.signup-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 32px;
+}
+
+.signup-logo {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #3f458a;
+    border-radius: 12px;
+
+    font-size: 22px;
+
+    box-shadow: 0 6px 15px rgba(63, 69, 138, 0.3);
+}
+
+.signup-brand {
+    margin: 0;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    color: #11121d;
+}
+
+.signup-tagline {
+    margin: 3px 0 0;
+
+    font-size: 12px;
+    color: #666666;
+}
+
+/* Heading */
+
+.signup-heading {
+    margin-bottom: 28px;
+}
+
+.signup-heading h1 {
+    margin: 0 0 10px;
+
+    font-size: 32px;
+    letter-spacing: -1px;
+
+    color: #11121d;
+}
+
+.signup-heading p {
+    margin: 0;
+
+    max-width: 480px;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    color: pink;
+}
+
+/* Form */
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    color: #222222;
+}
+
+.signup-form label span {
+    color: #e32626;
+    margin-left: 2px;
+}
+
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+    width: 100%;
+    height: 43px;
+
+    padding: 0 13px;
+
+    border: 1px solid #999999;
+    border-radius: 8px;
+
+    background: white;
+
+    font-size: 14px;
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.signup-form input[type="text"]:focus,
+.signup-form input[type="email"]:focus,
+.signup-form input[type="password"]:focus {
+    border-color: #3f458a;
+
+    box-shadow:
+        0 0 0 3px rgba(63, 69, 138, 0.12);
+}
+
+.name-field,
+.email-field {
+    margin-bottom: 20px;
+}
+
+/* Password fields */
+
+.password-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+/* Terms */
+
+.terms {
+    display: flex !important;
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 3px 0 22px !important;
+
+    font-size: 12px !important;
+    font-weight: 500 !important;
+
+    color: #555555 !important;
+}
+
+.terms input {
+    width: 15px;
+    height: 15px;
+
+    accent-color: #3f458a;
+}
+
+/* Button */
+
+.signup-button {
+    width: 100%;
+    height: 43px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #3f458a;
+    color: white;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 15px rgba(52, 36, 208, 0.25);
+
+    transition: 0.2s;
+}
+
+.signup-button:hover {
+    background: #39337a;
+    transform: translateY(-1px);
+}
+
+/* Login link */
+
+.login-text {
+    text-align: center;
+
+    margin: 24px 0 0;
+
+    font-size: 14px;
+
+    color: #555555;
+}
+
+.login-text button {
+    border: none;
+    background: none;
+
+    padding: 0;
+
+    color: #3f458a;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+
+    .signup-page {
+        padding: 25px 15px;
+    }
+
+    .signup-card {
+        padding: 35px 25px;
+    }
+
+    .signup-heading h1 {
+        font-size: 27px;
+    }
+
+    .password-fields {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}

@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@react-oauth/google": "^0.13.5",
+    "react-router-dom": "^7.18.3",
+    "recharts": "^3.10.1"
+  }
+}

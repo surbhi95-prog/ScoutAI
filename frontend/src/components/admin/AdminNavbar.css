@@ -1,0 +1,105 @@
+.admin-navbar {
+    min-height: 72px;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    background: #15151c;
+    border-bottom: 1px solid #2a2a35;
+    color: #ffffff;
+}
+
+.admin-navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.admin-navbar-brand small {
+    padding: 4px 9px;
+    border-radius: 6px;
+    background: #29213d;
+    color: #a78bfa;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.admin-navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-navbar-links a {
+    padding: 9px 15px;
+    border-radius: 8px;
+    color: #a1a1ad;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+.admin-navbar-links a:hover {
+    background: #20202a;
+    color: #ffffff;
+}
+
+.admin-navbar-links a.active {
+    background: #29213d;
+    color: #a78bfa;
+    font-weight: 600;
+}
+
+.admin-logout-button {
+    padding: 9px 15px;
+    border: 1px solid #3a3035;
+    border-radius: 8px;
+    background: transparent;
+    color: #f08b8b;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.admin-logout-button:hover {
+    background: #2a1f23;
+    border-color: #5a353b;
+}
+
+@media (max-width: 700px) {
+    .admin-navbar {
+        padding: 15px 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .admin-navbar-brand {
+        width: 100%;
+    }
+
+    .admin-navbar-links {
+        order: 2;
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 2px;
+    }
+
+    .admin-navbar-links a {
+        white-space: nowrap;
+    }
+
+    .admin-logout-button {
+        position: absolute;
+        right: 20px;
+        top: 15px;
+    }
+}

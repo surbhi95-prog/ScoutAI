@@ -1,0 +1,643 @@
+* {
+  box-sizing: border-box;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+
+  background: linear-gradient(145deg,
+      #11121d 0%,
+      #3f458a 35%,
+      #e9d985 110%,
+      #3f458a 100%);
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================================
+   MAIN AUTH CARD
+========================================= */
+
+.login-card {
+  width: 100%;
+  max-width: 940px;
+  min-height: 680px;
+
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   LEFT BRAND SECTION
+========================================= */
+
+.login-brand {
+  margin: 20px;
+  padding: 30px;
+
+  border-radius: 14px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  color: white;
+
+  background:
+    radial-gradient(circle at 15% 10%,
+      #e9d985 0%,
+      transparent 35%),
+    radial-gradient(circle at 50% 45%,
+      #3f458a 100%,
+      transparent 55%),
+    linear-gradient(145deg,
+      #11121d 100%,
+      #bd20ed);
+
+  position: relative;
+  z-index: 5;
+}
+
+.brand-content {
+  margin-top: 5px;
+}
+
+.brand-small {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.login-brand h1 {
+  font-size: 48px;
+  margin: 0 0 18px;
+  letter-spacing: -2px;
+}
+
+.brand-description {
+  max-width: 280px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.brand-bottom {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+
+/* =========================================
+   AUTH PANELS
+========================================= */
+
+.auth-panel {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 50%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 35px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  transition:
+    transform 0.65s cubic-bezier(0.77, 0, 0.175, 1),
+    opacity 0.45s ease;
+
+  overflow-y: auto;
+}
+
+
+/* =========================================
+   LOGIN PANEL
+========================================= */
+
+.login-panel {
+  transform: translateX(0);
+  opacity: 1;
+
+  z-index: 3;
+}
+
+
+/* =========================================
+   SIGNUP PANEL
+========================================= */
+
+.signup-panel {
+  transform: translateX(100%);
+  opacity: 0;
+
+  z-index: 2;
+}
+
+
+/* =========================================
+   WHEN SIGNUP IS ACTIVE
+========================================= */
+
+.login-card.show-signup .login-panel {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.login-card.show-signup .signup-panel {
+  transform: translateX(0);
+  opacity: 1;
+
+  z-index: 4;
+}
+
+
+/* =========================================
+   FORM CONTAINERS
+========================================= */
+
+.login-form-container,
+.signup-form-container {
+  width: 100%;
+  max-width: 310px;
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.login-icon {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #dedede;
+
+  border-radius: 50%;
+
+  font-size: 21px;
+
+  margin-bottom: 18px;
+}
+
+
+/* =========================================
+   HEADINGS
+========================================= */
+
+.login-form-container h2,
+.signup-form-container h2 {
+  margin: 0;
+
+  font-size: 29px;
+
+  color: #111111;
+}
+
+.login-subtitle {
+  margin: 12px 0 35px;
+
+  color: white;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.login-form-container form,
+.signup-form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =========================================
+   LABELS
+========================================= */
+
+.login-form-container label,
+.signup-form-container label {
+  font-size: 14px;
+
+  font-weight: 700;
+
+  margin-bottom: 10px;
+
+  color: #161616;
+}
+
+.login-form-container label span,
+.signup-form-container label span {
+  color: #e32626;
+
+  margin-left: 2px;
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.login-form-container input[type="email"],
+.login-form-container input[type="text"],
+.login-form-container input[type="password"],
+.signup-form-container input[type="text"],
+.signup-form-container input[type="email"],
+.signup-form-container input[type="password"] {
+  width: 100%;
+
+  height: 40px;
+
+  padding: 0 12px;
+
+  border: 1px solid #888888;
+
+  border-radius: 8px;
+
+  font-size: 14px;
+
+  outline: none;
+
+  margin-bottom: 20px;
+
+  background: white;
+}
+
+/* Remove bottom margin when input is inside the password wrapper
+   — the wrapper itself carries the spacing */
+.password-input-wrapper input {
+  margin-bottom: 0 !important;
+}
+
+.login-form-container input:focus,
+.signup-form-container input:focus {
+  border-color: #3f458a;
+
+  box-shadow:
+    0 0 0 3px rgba(59, 40, 216, 0.12);
+}
+
+
+/* =========================================
+   PASSWORD HEADER
+========================================= */
+
+.password-heading {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.password-heading label {
+  margin-bottom: 10px;
+}
+
+.forgot-password {
+  border: none;
+
+  background: none;
+
+  color: #3f458a;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  margin-bottom: 10px;
+}
+
+
+/* =========================================
+   MAIN BUTTON
+========================================= */
+
+.login-button {
+  height: 40px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: #3f458a;
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  margin-top: 3px;
+
+  box-shadow:
+    0 6px 15px rgba(52, 36, 208, 0.25);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.login-button:hover {
+  background: #39337a;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================
+   DIVIDER
+========================================= */
+
+.divider {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 22px 0;
+}
+
+.divider span {
+  flex: 1;
+
+  height: 1px;
+
+  background: #777777;
+}
+
+.divider p {
+  margin: 0;
+
+  white-space: nowrap;
+
+  font-size: 12px;
+
+  color: #555555;
+}
+
+
+/* =========================================
+   SOCIAL BUTTONS
+========================================= */
+
+.social-buttons {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 18px;
+}
+
+.social-buttons button {
+  width: 76px;
+
+  height: 36px;
+
+  border: 1px solid #888888;
+
+  border-radius: 8px;
+
+  background: white;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.social-buttons button:hover {
+  background: #f4f4f4;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================
+   SIGNUP / LOGIN SWITCH TEXT
+========================================= */
+
+.signup-text {
+  text-align: center;
+
+  font-size: 14px;
+
+  color: #222222;
+
+  margin-top: 25px;
+}
+
+.signup-text button {
+  border: none;
+
+  background: none;
+
+  color: #3f458a;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  font-size: 14px;
+}
+
+.signup-text button:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   TERMS CHECKBOX
+========================================= */
+
+.terms {
+  display: flex !important;
+
+  align-items: flex-start;
+
+  gap: 8px;
+
+  margin-top: -5px;
+
+  margin-bottom: 18px !important;
+
+  font-size: 12px !important;
+
+  font-weight: 500 !important;
+
+  cursor: pointer;
+}
+
+.terms input[type="checkbox"] {
+  width: 15px;
+
+  height: 15px;
+
+  margin: 0;
+
+  flex-shrink: 0;
+
+  cursor: pointer;
+}
+
+.terms span {
+  color: #333 !important;
+
+  margin: 0 !important;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .login-page {
+    padding: 20px 12px;
+
+    align-items: center;
+  }
+
+  .login-card {
+    max-width: 430px;
+
+    min-height: 700px;
+
+    display: block;
+  }
+
+
+  /* Hide branding on mobile */
+
+  .login-brand {
+    display: none;
+  }
+
+
+  /* Both panels become full width */
+
+  .auth-panel {
+    width: 100%;
+
+    padding: 30px 25px;
+  }
+
+
+  /* Login */
+
+  .login-panel {
+    transform: translateX(0);
+  }
+
+
+  /* Signup */
+
+  .signup-panel {
+    transform: translateX(100%);
+  }
+
+
+  /* Signup active */
+
+  .login-card.show-signup .login-panel {
+    transform: translateX(-100%);
+  }
+
+  .login-card.show-signup .signup-panel {
+    transform: translateX(0);
+  }
+
+}
+
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.password-input-wrapper input {
+  padding-right: 42px !important;
+  margin-bottom: 0 !important;
+  width: 100% !important;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 6px;
+  top: 20px;
+  /* half of the 40px input height */
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+
+  color: #9ca3af;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.password-toggle:hover {
+  color: rgb(141, 141, 141);
+  background-color: rgba(99, 102, 241, 0.08);
+}
+
+.password-toggle:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 1px;
+}
+
+.password-toggle svg {
+  display: block;
+  flex-shrink: 0;
+}

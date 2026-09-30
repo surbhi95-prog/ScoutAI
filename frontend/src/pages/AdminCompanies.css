@@ -1,0 +1,348 @@
+.admin-companies-page {
+    min-height: calc(100vh - 72px);
+    padding: 40px;
+    background: #101015;
+    color: #ffffff;
+}
+
+.companies-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.companies-header h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.companies-header p {
+    margin: 0;
+    color: #9696a3;
+    font-size: 14px;
+}
+
+.add-company-button {
+    padding: 10px 16px;
+    border: 1px solid #5b4690;
+    border-radius: 8px;
+    background: #29213d;
+    color: #c5b4ff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.add-company-button:hover {
+    background: #35294d;
+    border-color: #7058ad;
+}
+
+.company-form-card {
+    margin-bottom: 24px;
+    padding: 26px;
+    border: 1px solid #292932;
+    border-radius: 14px;
+    background: #18181f;
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 26px;
+}
+
+.form-header h2 {
+    margin: 0 0 6px;
+    font-size: 19px;
+    font-weight: 650;
+}
+
+.form-header p {
+    margin: 0;
+    color: #777783;
+    font-size: 13px;
+}
+
+.close-form-button {
+    width: 34px;
+    height: 34px;
+    border: 1px solid #34343d;
+    border-radius: 8px;
+    background: transparent;
+    color: #9696a3;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.close-form-button:hover {
+    background: #24242d;
+    color: #ffffff;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: #b8b8c2;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 13px;
+    border: 1px solid #34343d;
+    border-radius: 8px;
+    outline: none;
+    background: #111117;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.form-group input::placeholder {
+    color: #5f5f69;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #7058ad;
+}
+
+.active-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    align-self: end;
+    min-height: 40px;
+    color: #b8b8c2;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.active-toggle input {
+    width: 16px;
+    height: 16px;
+    accent-color: #7c5ce0;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid #292932;
+}
+
+.cancel-button,
+.save-company-button {
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cancel-button {
+    border: 1px solid #34343d;
+    background: transparent;
+    color: #a1a1ad;
+}
+
+.cancel-button:hover {
+    background: #24242d;
+    color: #ffffff;
+}
+
+.save-company-button {
+    border: 1px solid #5b4690;
+    background: #7c5ce0;
+    color: #ffffff;
+}
+
+.save-company-button:hover {
+    background: #8a6be8;
+}
+
+.save-company-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.form-error {
+    margin: 0 0 20px;
+    padding: 10px 12px;
+    border: 1px solid #4a3035;
+    border-radius: 8px;
+    background: #2a1f23;
+    color: #f08b8b;
+    font-size: 13px;
+}
+
+.companies-table-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #292932;
+    border-radius: 14px;
+    background: #18181f;
+}
+
+.companies-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.companies-table th,
+.companies-table td {
+    padding: 17px 20px;
+    text-align: left;
+    border-bottom: 1px solid #292932;
+    white-space: nowrap;
+}
+
+.companies-table th {
+    background: #1d1d25;
+    color: #9696a3;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.companies-table td {
+    color: #d6d6de;
+    font-size: 14px;
+}
+
+.companies-table tbody tr:hover {
+    background: #1e1e27;
+}
+
+.companies-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.company-name {
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+.company-status {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.company-status.active {
+    background: #183326;
+    color: #70d39a;
+}
+
+.company-status.inactive {
+    background: #292a2f;
+    color: #8f9099;
+}
+
+.edit-company-button {
+    padding: 7px 12px;
+    border: 1px solid #40365c;
+    border-radius: 7px;
+    background: transparent;
+    color: #a78bfa;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.edit-company-button:hover {
+    background: #29213d;
+}
+
+.empty-state {
+    padding: 70px 20px;
+    text-align: center;
+    border: 1px solid #292932;
+    border-radius: 14px;
+    background: #18181f;
+}
+
+.empty-state h3 {
+    margin: 0 0 8px;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.empty-state p {
+    margin: 0;
+    color: #9696a3;
+    font-size: 14px;
+}
+
+.error-message {
+    color: #f08b8b;
+}
+
+@media (max-width: 800px) {
+    .admin-companies-page {
+        padding: 30px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-companies-page {
+        padding: 24px 20px;
+    }
+
+    .companies-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .companies-header h1 {
+        font-size: 26px;
+    }
+
+    .company-form-card {
+        padding: 20px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .cancel-button,
+    .save-company-button {
+        width: 100%;
+    }
+
+    .companies-table {
+        min-width: 800px;
+    }
+}
