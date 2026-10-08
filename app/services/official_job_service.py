@@ -8,6 +8,7 @@ from urllib.parse import urlparse, urljoin
 import requests
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
 
@@ -23,6 +24,81 @@ ATS_DOMAINS = [
 ]
 
 
+NON_OFFICIAL_DOMAINS = [
+    "indeed.com",
+    "linkedin.com",
+    "glassdoor.com",
+    "naukri.com",
+    "monster.com",
+    "ziprecruiter.com",
+    "simplyhired.com",
+    "foundit.in",
+    "ambitionbox.com",
+    "wellfound.com",
+    "instagram.com",
+    "facebook.com",
+    "twitter.com",
+    "x.com",
+    "youtube.com",
+    "tiktok.com",
+    "reddit.com"
+]
+
+
+def normalize_text(value: str):
+    return re.sub(
+        r"[^a-z0-9]",
+        "",
+        value.lower()
+    )
+
+
+def is_blocked_domain(hostname: str):
+    hostname = hostname.lower().removeprefix("www.")
+
+    return any(
+        hostname == domain
+        or hostname.endswith("." + domain)
+        for domain in NON_OFFICIAL_DOMAINS
+    )
+
+
+def domain_matches_company(
+    hostname: str,
+    company: str
+):
+    normalized_hostname = normalize_text(hostname)
+    normalized_company = normalize_text(company)
+
+    if (
+        normalized_company
+        and normalized_company in normalized_hostname
+    ):
+        return True
+
+    company_tokens = [
+        token
+        for token in re.findall(
+            r"[a-zA-Z0-9]+",
+            company.lower()
+        )
+        if len(token) >= 4
+    ]
+
+    if not company_tokens:
+        return False
+
+    matched_tokens = sum(
+        1
+        for token in company_tokens
+        if token in normalized_hostname
+    )
+
+    return matched_tokens >= max(
+        1,
+        len(company_tokens) // 2
+    )
+
 def get_official_careers_domain(company: str):
     client = serpapi.Client(
         api_key=os.getenv("SERPAPI_KEY")
@@ -30,15 +106,33 @@ def get_official_careers_domain(company: str):
 
     results = client.search({
         "engine": "google",
-        "q": f"{company} official careers",
+        "q": f"{company} careers jobs",
         "location": "India"
     })
 
-    organic_results = results.get("organic_results", [])
+    organic_results = results.get(
+        "organic_results",
+        []
+    )
+
+    print("\n--- SERPAPI CAREERS RESULTS ---")
+    for result in organic_results[:10]:
+        print(
+            "TITLE:", result.get("title"),
+            "| LINK:", result.get("link"),
+            "| SNIPPET:", result.get("snippet")
+        )
+    print("--- END RESULTS ---\n")
+
+    company_normalized = normalize_text(company)
+
+    best_candidate = None
+    best_score = 0
 
     for result in organic_results:
         link = result.get("link", "")
-        title = result.get("title", "").lower()
+        title = result.get("title", "")
+        snippet = result.get("snippet", "")
 
         if not link:
             continue
@@ -50,19 +144,78 @@ def get_official_careers_domain(company: str):
 
         hostname = hostname.lower().removeprefix("www.")
 
-        if company.lower() in title and "career" in title:
-            return {
+        if is_blocked_domain(hostname):
+            continue
+
+        normalized_title = normalize_text(title)
+        normalized_snippet = normalize_text(snippet)
+        normalized_link = normalize_text(link)
+
+        company_in_title = (
+            company_normalized in normalized_title
+        )
+
+        company_in_snippet = (
+            company_normalized in normalized_snippet
+        )
+
+        domain_matches = domain_matches_company(
+            hostname,
+            company
+        )
+
+        careers_word = (
+            "career" in normalized_title
+            or "jobs" in normalized_title
+            or "job" in normalized_title
+        )
+
+        careers_in_link = (
+            "career" in normalized_link
+            or "jobs" in normalized_link
+            or "job" in normalized_link
+        )
+
+        score = 0
+
+        if company_in_title:
+            score += 5
+
+        if company_in_snippet:
+            score += 2
+
+        if domain_matches:
+            score += 5
+
+        if careers_word:
+            score += 3
+
+        if careers_in_link:
+            score += 2
+
+        if domain_matches and careers_word:
+            score += 3
+
+        if company_in_title and careers_word:
+            score += 2
+
+        if score > best_score:
+            best_score = score
+
+            best_candidate = {
                 "found": True,
                 "url": link,
                 "domain": hostname
             }
+
+    if best_candidate and best_score >= 8:
+        return best_candidate
 
     return {
         "found": False,
         "url": None,
         "domain": None
     }
-
 
 def discover_ats_domains(careers_url: str):
     if not careers_url:
@@ -91,9 +244,14 @@ def discover_ats_domains(careers_url: str):
         ats_domains = set()
 
         for link in links:
-            absolute_url = urljoin(careers_url, link)
+            absolute_url = urljoin(
+                careers_url,
+                link
+            )
 
-            hostname = urlparse(absolute_url).hostname
+            hostname = urlparse(
+                absolute_url
+            ).hostname
 
             if not hostname:
                 continue
@@ -103,7 +261,9 @@ def discover_ats_domains(careers_url: str):
             for ats_domain in ATS_DOMAINS:
                 if (
                     hostname == ats_domain
-                    or hostname.endswith("." + ats_domain)
+                    or hostname.endswith(
+                        "." + ats_domain
+                    )
                 ):
                     ats_domains.add(hostname)
 
@@ -112,8 +272,8 @@ def discover_ats_domains(careers_url: str):
     except requests.RequestException:
         return []
 
-
 def search_job_on_domain(
+        company:str,
     job_title: str,
     domain: str
 ):
@@ -123,14 +283,28 @@ def search_job_on_domain(
 
     results = client.search({
         "engine": "google",
-        "q": f'site:{domain} "{job_title}"',
+        "q": f'"{company}" "{job_title}" careers jobs',
         "location": "India"
     })
 
-    organic_results = results.get("organic_results", [])
+    organic_results = results.get(
+        "organic_results",
+        []
+    )
+
+    print("\n--- SERPAPI JOB RESULTS ---")
+    for result in organic_results[:10]:
+        print(
+            "TITLE:", result.get("title"),
+            "| LINK:", result.get("link"),
+            "| SNIPPET:", result.get("snippet")
+        )
+    print("--- END JOB RESULTS ---\n")
 
     best_match = None
     best_score = 0
+
+    requested_title = job_title.lower().strip()
 
     for result in organic_results:
         link = result.get("link", "")
@@ -153,29 +327,38 @@ def search_job_on_domain(
         ):
             continue
 
+        title_lower = title.lower()
+        snippet_lower = snippet.lower()
+
         similarity = SequenceMatcher(
             None,
-            job_title.lower(),
-            title.lower()
+            requested_title,
+            title_lower
         ).ratio()
 
-        if job_title.lower() in snippet.lower():
+        if requested_title in title_lower:
+            similarity = 1.0
+
+        if requested_title in snippet_lower:
             similarity = max(
                 similarity,
-                0.70
+                0.85
             )
 
         if similarity > best_score:
             best_score = similarity
             best_match = result
 
-    if best_match and best_score >= 0.70:
+    if best_match and best_score >= 0.60:
         return {
             "found": True,
             "title": best_match.get("title"),
             "url": best_match.get("link"),
             "snippet": best_match.get("snippet"),
-            "match_score": round(best_score, 2)
+            "match_score": round(
+                best_score,
+                2
+            )
         }
 
     return {
@@ -183,9 +366,11 @@ def search_job_on_domain(
         "title": None,
         "url": None,
         "snippet": None,
-        "match_score": round(best_score, 2)
+        "match_score": round(
+            best_score,
+            2
+        )
     }
-
 
 def search_job_on_official_site(
     company: str,
@@ -195,19 +380,25 @@ def search_job_on_official_site(
 ):
     job_title = job_title.strip()
 
-    domains_to_search = [careers_domain]
+    domains_to_search = [
+        careers_domain
+    ]
 
-    ats_domains = discover_ats_domains(careers_url)
+    ats_domains = discover_ats_domains(
+        careers_url
+    )
 
     for ats_domain in ats_domains:
         if ats_domain not in domains_to_search:
-            domains_to_search.append(ats_domain)
+            domains_to_search.append(
+                ats_domain
+            )
 
     best_result = None
 
     for domain in domains_to_search:
         result = search_job_on_domain(
-            job_title,
+            company,job_title,
             domain
         )
 
@@ -237,7 +428,9 @@ def search_official_job(
 ):
     job_title = job_title.strip()
 
-    careers = get_official_careers_domain(company)
+    careers = get_official_careers_domain(
+        company
+    )
 
     if not careers["found"]:
         return {

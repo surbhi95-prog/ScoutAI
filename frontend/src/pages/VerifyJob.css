@@ -89,6 +89,13 @@
     font-size: 13px;
 }
 
+.form-error {
+    margin: -12px 0 20px;
+    color: #fca5a5;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
 .form-group {
     margin-bottom: 20px;
 }
@@ -139,6 +146,35 @@
 .form-group input::placeholder,
 .form-group textarea::placeholder {
     color: #6b7280;
+}
+
+.image-upload-input {
+    height: auto !important;
+    padding: 9px !important;
+}
+
+.image-upload-input::file-selector-button {
+    margin-right: 12px;
+    padding: 7px 10px;
+    border: 0;
+    border-radius: 6px;
+    background: #1f2937;
+    color: #ffffff;
+    font: inherit;
+    cursor: pointer;
+}
+
+.image-upload-help,
+.selected-image-name {
+    margin: 9px 0 0;
+    color: #9ca3af;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.selected-image-name {
+    color: #d1d5db;
+    overflow-wrap: anywhere;
 }
 
 .paste-section {
@@ -314,6 +350,10 @@
 
     .mode-or {
         margin: -3px 0;
+    }
+
+    .input-mode {
+        gap: 8px;
     }
 
     .signal-grid {

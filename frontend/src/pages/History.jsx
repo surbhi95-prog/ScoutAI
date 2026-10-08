@@ -236,8 +236,10 @@ function History() {
                                 className="history-card"
                                 key={report.id}
                                 onClick={() =>
+                                {
+                                    console.log("OPENING REPORT ID:", report.id);
                                     navigate(`/history/${report.id}`)
-                                }
+                                }}
                             >
 
                                 <div className="history-card-main">

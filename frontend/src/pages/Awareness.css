@@ -1,0 +1,360 @@
+.awareness-page {
+    min-height: 100vh;
+    background: #f7f8fc;
+    color: #202124;
+    padding-bottom: 60px;
+}
+
+.awareness-hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 30px 60px;
+}
+
+.awareness-badge {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 30px;
+    background: #eceaff;
+    color: #5b52d6;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 22px;
+}
+
+.awareness-hero h1 {
+    max-width: 800px;
+    margin: 0;
+    font-size: 54px;
+    line-height: 1.08;
+    letter-spacing: -1.8px;
+}
+
+.awareness-hero h1 span {
+    color: #6c63ff;
+}
+
+.awareness-hero > p {
+    max-width: 720px;
+    margin: 24px 0;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #666b78;
+}
+
+.hero-warning {
+    max-width: 760px;
+    padding: 18px 20px;
+    border-left: 4px solid #6c63ff;
+    background: white;
+    border-radius: 10px;
+    color: #555b68;
+    line-height: 1.6;
+    box-shadow: 0 8px 25px rgba(30, 30, 60, 0.05);
+}
+
+.hero-warning strong {
+    color: #292c36;
+}
+
+.awareness-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 55px 30px;
+}
+
+.section-heading {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 32px;
+}
+
+.section-heading > span {
+    color: #6c63ff;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    padding-top: 7px;
+}
+
+.section-heading h2 {
+    margin: 0 0 8px;
+    font-size: 30px;
+}
+
+.section-heading p {
+    margin: 0;
+    color: #707582;
+    line-height: 1.6;
+}
+
+.red-flags-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.red-flag-card {
+    background: white;
+    border: 1px solid #eeeeF4;
+    border-radius: 16px;
+    padding: 25px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.red-flag-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(30, 30, 60, 0.08);
+}
+
+.flag-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4f3ff;
+    border-radius: 12px;
+    font-size: 23px;
+    margin-bottom: 18px;
+}
+
+.red-flag-card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+
+.red-flag-card p {
+    margin: 0;
+    color: #707582;
+    line-height: 1.65;
+    font-size: 14px;
+}
+
+.verify-section {
+    background: white;
+    max-width: none;
+    padding-left: calc((100% - 1040px) / 2);
+    padding-right: calc((100% - 1040px) / 2);
+}
+
+.verification-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.verification-step {
+    display: flex;
+    gap: 18px;
+    padding: 24px;
+    border: 1px solid #eeeeF4;
+    border-radius: 15px;
+    background: #fafaff;
+}
+
+.step-number {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #6c63ff;
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.verification-step h3 {
+    margin: 2px 0 8px;
+    font-size: 17px;
+}
+
+.verification-step p {
+    margin: 0;
+    color: #707582;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.stop-section {
+    max-width: 1040px;
+    margin: 55px auto;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    background: #fff4f3;
+    border: 1px solid #ffdcd8;
+    border-radius: 18px;
+}
+
+.stop-icon {
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 14px;
+    font-size: 26px;
+}
+
+.stop-section h2 {
+    margin: 0 0 7px;
+    font-size: 23px;
+}
+
+.stop-section p {
+    margin: 0;
+    color: #69656a;
+    line-height: 1.6;
+}
+
+.checklist-card {
+    background: white;
+    border: 1px solid #eeeeF4;
+    border-radius: 18px;
+    padding: 10px 25px;
+}
+
+.check-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 0;
+    border-bottom: 1px solid #eeeeF4;
+}
+
+.check-item:last-child {
+    border-bottom: none;
+}
+
+.check-item span {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eaf8ef;
+    color: #279653;
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.check-item p {
+    margin: 0;
+    color: #555b68;
+}
+
+.awareness-cta {
+    max-width: 1040px;
+    margin: 30px auto 0;
+    padding: 38px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    background: #24233b;
+    color: white;
+    border-radius: 20px;
+}
+
+.cta-label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    color: #aaa7ff;
+}
+
+.awareness-cta h2 {
+    margin: 8px 0;
+    font-size: 28px;
+}
+
+.awareness-cta p {
+    margin: 0;
+    color: #c8c7d1;
+}
+
+.awareness-cta-btn {
+    flex-shrink: 0;
+    padding: 13px 21px;
+    border-radius: 9px;
+    background: #6c63ff;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.awareness-cta-btn:hover {
+    background: #5b52d6;
+}
+
+.awareness-source {
+    max-width: 1040px;
+    margin: 35px auto 0;
+    padding: 0 30px;
+    text-align: center;
+}
+
+.awareness-source p {
+    color: #9296a1;
+    font-size: 12px;
+}
+
+@media (max-width: 850px) {
+    .red-flags-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .verification-list {
+        grid-template-columns: 1fr;
+    }
+
+    .verify-section {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .awareness-cta {
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .awareness-hero {
+        padding-top: 50px;
+    }
+
+    .awareness-hero h1 {
+        font-size: 39px;
+    }
+
+    .red-flags-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading h2 {
+        font-size: 25px;
+    }
+
+    .stop-section {
+        margin-left: 30px;
+        margin-right: 30px;
+        align-items: flex-start;
+    }
+
+    .awareness-cta {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 30px;
+    }
+}

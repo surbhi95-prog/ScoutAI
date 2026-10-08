@@ -80,7 +80,7 @@ class VerificationHistoryDetail(BaseModel):
 
     website_exists: bool | None
     email_matches_domain: bool | None
-    official_job_status: bool | None
+    official_job_status: str 
 
     created_at: datetime
 

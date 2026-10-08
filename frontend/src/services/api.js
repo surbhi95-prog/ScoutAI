@@ -263,3 +263,51 @@ export async function updateAdminCompany(
 
     return await response.json();
 }
+
+// Profile photo get req 
+export async function getProfile() {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(
+        `${API_BASE_URL}/auth/me`,
+        {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch profile");
+    }
+
+    return await response.json();
+}
+
+// UPDATE PROFILE API SERVICE
+export async function updateProfile(profileData) {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(
+        `${API_BASE_URL}/auth/me`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(profileData)
+        }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(
+            data.detail || "Failed to update profile"
+        );
+    }
+
+    return data;
+}

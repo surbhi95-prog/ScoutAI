@@ -107,9 +107,12 @@ function ReportDetails() {
                         <div>
                             <span>Official Job</span>
                             <strong>
-                                {report.official_job_found
+                                {report.official_job_status === "VERIFIED"
                                     ? "Found"
-                                    : "Not Found"}
+                                    : report.official_job_status === "NOT_FOUND"
+                                    ? "Not Found"
+                                    : "Unable to Verify"
+                                    }
                             </strong>
                         </div>
 

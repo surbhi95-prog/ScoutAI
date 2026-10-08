@@ -20,8 +20,9 @@ function Navbar() {
                 <NavLink to="/dashboard">DashBoard</NavLink>
                 <NavLink to="/verify">Verify Job</NavLink>
                 <NavLink to="/history">History</NavLink>
-
-
+                <NavLink to="/profile">Profile</NavLink>
+                <NavLink to="/awareness">Awareness</NavLink>
+                
                 <span className="navbar-user">
                     Hi, {userName}
                 </span>

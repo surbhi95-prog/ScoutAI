@@ -7,7 +7,8 @@ import VerifyJob from './pages/VerifyJob';
 import History from './pages/History';
 import ReportDetails from './pages/ReportDetails';
 import Dashboard from './pages/Dashboard';
-
+import Profile from './pages/Profile';
+import Awareness from './pages/Awareness';
 import ProtectedRoute from './components/ProtectedRoute';
 
 import AdminLayout from './pages/admin/AdminLayout';
@@ -60,6 +61,24 @@ function App() {
           }
         />
 
+        <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+              <Profile/>
+                </ProtectedRoute>
+            }
+            />
+          
+        <Route
+          path="awareness"
+          element={
+            <ProtectedRoute>
+              <Awareness />
+            </ProtectedRoute>
+          }
+        />
+
 
         {/* ADMIN ROUTES ------------ */}
         <Route path="/admin" element={
@@ -87,6 +106,7 @@ function App() {
               path="companies"
               element={<AdminCompanies />}
             />
+
         </Route>
 
       </Routes>

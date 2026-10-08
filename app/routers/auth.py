@@ -4,7 +4,8 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.user import User
 from app.schemas.user import UserCreate, UserLogin
-from app.core.security import (hash_password,verify_password,create_access_token) # hashing and JWT
+from app.models.verification import VerificationReport
+from app.core.security import (get_current_user, hash_password,verify_password,create_access_token) # hashing and JWT
 
 router = APIRouter(prefix="/auth",tags=["Authentication"])
 @router.post("/signup")
@@ -68,4 +69,80 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
         "name": existing_user.name,
         "email": existing_user.email,
         "role":existing_user.role
+    }
+
+
+# Profile photo get
+@router.get("/me")
+def get_profile(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    total_verifications = db.query(
+        VerificationReport
+    ).filter(
+        VerificationReport.user_id == current_user.id
+    ).count()
+
+    suspicious_jobs = db.query(
+        VerificationReport
+    ).filter(
+        VerificationReport.user_id == current_user.id,
+        VerificationReport.verdict == "Suspicious"
+    ).count()
+
+    return {
+        "id": current_user.id,
+        "name": current_user.name,
+        "email": current_user.email,
+        "role": current_user.role,
+        "created_at": current_user.created_at,
+        "total_verifications": total_verifications,
+        "suspicious_jobs": suspicious_jobs
+    }
+
+
+# Profile update req
+@router.put("/me")
+def update_profile(
+    profile: dict,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    name = profile.get("name", "").strip()
+    email = profile.get("email", "").strip().lower()
+
+    if not name:
+        raise HTTPException(
+            status_code=400,
+            detail="Name cannot be empty"
+        )
+
+    if not email:
+        raise HTTPException(
+            status_code=400,
+            detail="Email cannot be empty"
+        )
+
+    existing_user = db.query(User).filter(
+        User.email == email,
+        User.id != current_user.id
+    ).first()
+
+    if existing_user:
+        raise HTTPException(
+            status_code=400,
+            detail="Email already registered"
+        )
+
+    current_user.name = name
+    current_user.email = email
+
+    db.commit()
+    db.refresh(current_user)
+
+    return {
+        "message": "Profile updated successfully",
+        "name": current_user.name,
+        "email": current_user.email
     }

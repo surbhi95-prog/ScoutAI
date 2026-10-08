@@ -1,12 +1,17 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import "./VerifyJob.css";
-import { verifyJob,extractJob } from "../services/api";
+import { verifyJob, extractJob } from "../services/api";
+import { createWorker } from "tesseract.js";
 
 function VerifyJob() {
     const [result, setResult] = useState(null);
     const [inputMode, setInputMode] = useState("manual");
     const [pastedMessage, setPastedMessage] = useState("");
+    const [imageFile, setImageFile] = useState(null);
+    const [isExtracting, setIsExtracting] = useState(false);
+    const [isReadingImage, setIsReadingImage] = useState(false);
+    const [error, setError] = useState("");
 
     const [formData, setFormData] = useState({
         company: "",
@@ -26,18 +31,10 @@ function VerifyJob() {
     const handleModeChange = (mode) => {
         setInputMode(mode);
         setResult(null);
+        setError("");
     };
 
-    const handleExtract = async () => {
-    if (!pastedMessage.trim()) {
-        return;
-    }
-
-    try {
-        const extracted = await extractJob(pastedMessage);
-
-        console.log("Extracted data:", extracted);
-
+    const populateForm = (extracted) => {
         setFormData({
             company: extracted.company || "",
             job_title: extracted.job_title || "",
@@ -45,16 +42,86 @@ function VerifyJob() {
             recruiter_email: extracted.recruiter_email || "",
             job_description: extracted.job_description || "",
         });
-
         setInputMode("manual");
-    } catch (error) {
-        console.error("Extraction failed:", error);
+    };
+
+    const handleExtract = async () => {
+        if (!pastedMessage.trim()) {
+            return;
+        }
+
+        setIsExtracting(true);
+        setError("");
+        try {
+            const extracted = await extractJob(pastedMessage);
+            populateForm(extracted);
+        } catch (requestError) {
+            setError(requestError.message || "Could not extract job details.");
+        } finally {
+            setIsExtracting(false);
+        }
+    };
+
+    const handleImageChange = (event) => {
+        const file = event.target.files?.[0];
+        setError("");
+
+        if (!file) {
+            setImageFile(null);
+            return;
+        }
+
+        if (!file.type.startsWith("image/")) {
+            setImageFile(null);
+            setError("Choose an image file, such as PNG, JPG, or WEBP.");
+            event.target.value = "";
+            return;
+        }
+
+        if (file.size > 10 * 1024 * 1024) {
+            setImageFile(null);
+            setError("The image must be 10 MB or smaller.");
+            event.target.value = "";
+            return;
+        }
+
+        setImageFile(file);
+    };
+
+    const handleImageExtract = async () => {
+        if (!imageFile) {
+            return;
+        }
+
+        setIsReadingImage(true);
+        setError("");
+        let worker;
+
+        try {
+            worker = await createWorker("eng");
+            const { data } = await worker.recognize(imageFile);
+            const recognizedText = data.text.trim();
+
+            if (!recognizedText) {
+                throw new Error("No readable text was found in the image. Try a clearer image.");
+            }
+
+            setPastedMessage(recognizedText);
+            const extracted = await extractJob(recognizedText);
+            populateForm(extracted);
+        } catch (requestError) {
+            setError(requestError.message || "Could not read the uploaded image.");
+        } finally {
+            if (worker) {
+                await worker.terminate();
+            }
+            setIsReadingImage(false);
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setError("");
         try {
             const response = await verifyJob({
                 ...formData,
@@ -64,8 +131,8 @@ function VerifyJob() {
             });
 
             setResult(response);
-        } catch (error) {
-            console.log(error);
+        } catch (requestError) {
+            setError(requestError.message || "Could not verify this job.");
         }
     };
 
@@ -111,7 +178,25 @@ function VerifyJob() {
                             >
                                 Paste Job Message
                             </button>
+
+                            <span className="mode-or">or</span>
+
+                            <button
+                                type="button"
+                                className={`mode-button ${
+                                    inputMode === "image" ? "active" : ""
+                                }`}
+                                onClick={() => handleModeChange("image")}
+                            >
+                                Upload Image
+                            </button>
                         </div>
+
+                        {error && (
+                            <p className="form-error" role="alert">
+                                {error}
+                            </p>
+                        )}
 
                         {inputMode === "paste" ? (
                             <div className="paste-section">
@@ -136,11 +221,49 @@ function VerifyJob() {
                                     type="button"
                                     className="extract-button"
                                     onClick={handleExtract}
-                                    disabled={!pastedMessage.trim()}
+                                    disabled={!pastedMessage.trim() || isExtracting}
                                 >
-                                    Extract Details →
+                                    {isExtracting ? "Extracting details..." : "Extract Details →"}
                                 </button>
 
+                            </div>
+                        ) : inputMode === "image" ? (
+                            <div className="image-upload-section">
+                                <div className="form-group">
+                                    <label htmlFor="job-image">
+                                        Job Offer Image
+                                    </label>
+
+                                    <input
+                                        className="image-upload-input"
+                                        id="job-image"
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleImageChange}
+                                        disabled={isReadingImage}
+                                    />
+
+                                    <p className="image-upload-help">
+                                        Upload a clear screenshot or photo (PNG, JPG, or WEBP; up to 10 MB).
+                                    </p>
+
+                                    {imageFile && (
+                                        <p className="selected-image-name">
+                                            Selected: {imageFile.name}
+                                        </p>
+                                    )}
+                                </div>
+
+                                <button
+                                    type="button"
+                                    className="extract-button"
+                                    onClick={handleImageExtract}
+                                    disabled={!imageFile || isReadingImage}
+                                >
+                                    {isReadingImage
+                                        ? "Reading image and extracting details..."
+                                        : "Read Image & Extract Details →"}
+                                </button>
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit}>
@@ -283,9 +406,9 @@ function VerifyJob() {
                                         <span>Official Job</span>
 
                                         <strong>
-                                            {result.signals.official_job_status === "VERIFIED"
-                                                ? "Verified"
-                                                : result.signals.official_job_status === "NOT_FOUND"
+                                            {result.official_job_status === "VERIFIED"
+                                                ? "Found"
+                                                : result.official_job_status === "NOT_FOUND"
                                                 ? "Not Found"
                                                 : "Unable to Verify"}
                                         </strong>
