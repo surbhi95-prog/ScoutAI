@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "../components/Navbar";
 import "./Awareness.css";
 
 const redFlags = [
@@ -85,7 +86,7 @@ const verificationSteps = [
 function Awareness() {
     return (
         <div className="awareness-page">
-
+            <Navbar />
             <section className="awareness-hero">
                 <div className="awareness-badge">🛡️ JOB SCAM AWARENESS</div>
 

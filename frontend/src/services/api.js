@@ -311,3 +311,100 @@ export async function updateProfile(profileData) {
 
     return data;
 }
+
+// SCAM INDICATOR CRUD
+
+export async function getScamIndicators() {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(
+        `${API_BASE_URL}/admin/scam-indicators`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch scam indicators");
+    }
+
+    return response.json();
+}
+
+export async function addScamIndicator(data) {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(
+        `${API_BASE_URL}/admin/scam-indicators`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(data)
+        }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(
+            result.detail || "Failed to add scam indicator"
+        );
+    }
+
+    return result;
+}
+
+export async function updateScamIndicator(id, data) {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(
+        `${API_BASE_URL}/admin/scam-indicators/${id}`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(data)
+        }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(
+            result.detail || "Failed to update scam indicator"
+        );
+    }
+
+    return result;
+}
+
+export async function deleteScamIndicator(id) {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(
+        `${API_BASE_URL}/admin/scam-indicators/${id}`,
+        {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(
+            result.detail || "Failed to delete scam indicator"
+        );
+    }
+
+    return result;
+}

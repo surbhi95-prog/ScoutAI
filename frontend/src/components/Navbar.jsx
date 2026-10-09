@@ -17,11 +17,11 @@ function Navbar() {
             <div className="navbar-logo"> 🛡️ ScoutAI </div>
 
             <div className="navbar-links">
-                <NavLink to="/dashboard">DashBoard</NavLink>
                 <NavLink to="/verify">Verify Job</NavLink>
                 <NavLink to="/history">History</NavLink>
-                <NavLink to="/profile">Profile</NavLink>
+                <NavLink to="/dashboard">DashBoard</NavLink>
                 <NavLink to="/awareness">Awareness</NavLink>
+                <NavLink to="/profile">Profile</NavLink>
                 
                 <span className="navbar-user">
                     Hi, {userName}

@@ -1,8 +1,13 @@
+/* =============================================
+   ADMIN REPORTS — Cosmic Glassmorphic Theme
+   ============================================= */
+
 .admin-reports-page {
-    min-height: calc(100vh - 72px);
+    min-height: calc(100vh - 68px);
     padding: 40px;
-    background: #101015;
-    color: #ffffff;
+    background: #0c0c16;
+    color: #e8eaf6;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
 .reports-header {
@@ -18,20 +23,21 @@
     font-size: 30px;
     font-weight: 700;
     letter-spacing: -0.5px;
+    color: #e8eaf6;
 }
 
 .reports-header p {
     margin: 0;
-    color: #9696a3;
+    color: rgba(184, 186, 255, 0.55);
     font-size: 14px;
 }
 
 .report-count {
     padding: 8px 14px;
-    border: 1px solid #302b3e;
+    border: 1px solid rgba(102, 102, 255, 0.25);
     border-radius: 20px;
-    background: #1d1a27;
-    color: #a78bfa;
+    background: rgba(102, 102, 255, 0.08);
+    color: #b8baff;
     font-size: 13px;
     font-weight: 600;
 }
@@ -39,9 +45,10 @@
 .reports-table-container {
     width: 100%;
     overflow-x: auto;
-    border: 1px solid #292932;
-    border-radius: 14px;
-    background: #18181f;
+    border: 1px solid rgba(201, 232, 255, 0.1);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
 }
 
 .reports-table {
@@ -54,30 +61,30 @@
 .reports-table td {
     padding: 17px 16px;
     text-align: left;
-    border-bottom: 1px solid #292932;
+    border-bottom: 1px solid rgba(201, 232, 255, 0.07);
     white-space: nowrap;
 }
 
 .reports-table th {
-    background: #1d1d25;
-    color: #9696a3;
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(184, 186, 255, 0.5);
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
 }
 
 .reports-table td {
-    color: #d6d6de;
+    color: rgba(201, 232, 255, 0.8);
     font-size: 14px;
 }
 
 .reports-table tbody tr {
-    transition: 0.2s ease;
+    transition: background 0.2s ease;
 }
 
 .reports-table tbody tr:hover {
-    background: #1e1e27;
+    background: rgba(102, 102, 255, 0.05);
 }
 
 .reports-table tbody tr:last-child td {
@@ -85,32 +92,35 @@
 }
 
 .company-name {
-    color: #ffffff !important;
+    color: #e8eaf6 !important;
     font-weight: 600;
 }
 
 .verdict-badge {
     display: inline-block;
     padding: 6px 10px;
-    border-radius: 7px;
+    border-radius: 8px;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.2px;
 }
 
 .verdict-badge.genuine {
-    background: #183326;
-    color: #70d39a;
+    background: rgba(185, 240, 215, 0.1);
+    color: #b9f0d7;
+    border: 1px solid rgba(185, 240, 215, 0.22);
 }
 
 .verdict-badge.review {
-    background: #392f18;
-    color: #e5b95c;
+    background: rgba(255, 210, 128, 0.08);
+    color: #ffd280;
+    border: 1px solid rgba(255, 210, 128, 0.2);
 }
 
 .verdict-badge.suspicious {
-    background: #3a2023;
-    color: #f08b8b;
+    background: rgba(255, 100, 100, 0.08);
+    color: #ff9090;
+    border: 1px solid rgba(255, 100, 100, 0.2);
 }
 
 .status {
@@ -120,39 +130,39 @@
 }
 
 .status.verified {
-    color: #70d39a;
+    color: #b9f0d7;
 }
 
 .status.not-found {
-    color: #f08b8b;
+    color: #ff9090;
 }
 
 .status.unable {
-    color: #e5b95c;
+    color: #ffd280;
 }
 
 .empty-state {
     padding: 70px 20px;
     text-align: center;
-    border: 1px solid #292932;
-    border-radius: 14px;
-    background: #18181f;
+    border: 1px solid rgba(201, 232, 255, 0.1);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .empty-state h3 {
     margin: 0 0 8px;
-    color: #ffffff;
+    color: #e8eaf6;
     font-size: 18px;
 }
 
 .empty-state p {
     margin: 0;
-    color: #9696a3;
+    color: rgba(184, 186, 255, 0.5);
     font-size: 14px;
 }
 
 .error-message {
-    color: #f08b8b;
+    color: #ff9090;
 }
 
 @media (max-width: 900px) {
@@ -163,7 +173,7 @@
 
 @media (max-width: 600px) {
     .admin-reports-page {
-        min-height: calc(100vh - 72px);
+        min-height: calc(100vh - 68px);
         padding: 24px 20px;
     }
 
@@ -181,20 +191,21 @@
     }
 }
 
-/* Delete button css  */
+/* Delete button */
 .delete-report-button {
     padding: 7px 11px;
-    border: 1px solid #4a3035;
+    border: 1px solid rgba(255, 100, 100, 0.22);
     border-radius: 7px;
     background: transparent;
-    color: #f08b8b;
+    color: #ff9090;
     font-size: 11px;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .delete-report-button:hover {
-    background: #2a1f23;
-    border-color: #6a3b43;
+    background: rgba(255, 100, 100, 0.1);
+    border-color: rgba(255, 100, 100, 0.4);
+    color: #ffaaaa;
 }

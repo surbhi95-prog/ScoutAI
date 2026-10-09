@@ -1,3 +1,4 @@
+
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
@@ -81,7 +82,6 @@ def verify_job(
             company.ats_identifier,
             job_title
         )
-
     else:
         official_job_result = search_official_job(
             request.company,
@@ -101,6 +101,7 @@ def verify_job(
                 )
             }
 
+    # Determine official job verification status
     if official_job_match:
         official_job_status = "VERIFIED"
 
@@ -116,6 +117,7 @@ def verify_job(
     else:
         official_job_status = "UNABLE_TO_VERIFY"
 
+    # Determine company domain
     if company:
         domain_to_check = company.domain
     else:
@@ -141,96 +143,102 @@ def verify_job(
         careers_url
     )
 
-    score = 0
-    reasons = []
-    ml_probability = None
+    # Prepare job description and ML prediction
+    job_description = request.job_description or ""
 
-    job_description = (
-        request.job_description
-        or ""
-    )
+    ml_probability = None
 
     if job_description.strip():
         ml_probability = predict_scam_probability(
             job_description
         )
 
-    if ats_configured:
-        if official_job_match:
-            score += 60
-            reasons.append(
-                "Official ATS Job Verified"
-            )
-        else:
-            reasons.append(
-                "Official ATS Job Not Found"
-            )
+    # -----------------------------------------
+    # REASONABLE SCORING SYSTEM
+    # -----------------------------------------
 
-    elif official_job_match:
-        score += 60
+    # Start at 60: the job is unverified, not
+    # automatically suspicious.
+    score = 60.0
+    reasons = []
+
+    # 1. Official job verification
+    if official_job_match:
+        score += 20
+
         reasons.append(
             "Official Job Verified"
         )
 
-    elif official_job_result is not None:
-        if official_job_result.get("careers_domain"):
-            reasons.append(
-                "Official Job Not Found"
-            )
-        else:
-            reasons.append(
-                "Official Job Could Not Be Verified"
-            )
+    elif official_job_status == "NOT_FOUND":
+        score -= 10
+
+        reasons.append(
+            "Official Job Not Found"
+        )
 
     else:
+        # An unavailable verification source is
+        # not proof that the job is fraudulent.
         reasons.append(
             "Official Job Could Not Be Verified"
         )
 
+    # 2. Company website
     if website_result["exists"]:
-        score += 20
+        score += 3
+
         reasons.append(
             "Company Website reachable"
         )
-
     else:
+        score -= 8
+
         reasons.append(
             "Company Website not reachable"
         )
 
+    # 3. Careers page
     if careers_result["exists"]:
-        score += 10
+        score += 3
+
         reasons.append(
             "Official Careers Page reachable"
         )
-
     else:
+        score -= 4
+
         reasons.append(
             "Official Careers Page not reachable"
         )
 
+    # 4. Database-backed scam indicators
     scam_hits = detect_scam_keywords(
-        job_description
+        job_description,
+        db
     )
 
     if scam_hits:
-        total_penalty = 0
+        total_penalty = 0.0
 
         for hit in scam_hits:
-            penalty = hit["penalty"]
+            penalty = float(hit["penalty"])
 
-            if official_job_match:
-                if hit["severity"] == "weak":
-                    penalty *= 0.3
-
-                elif hit["severity"] == "medium":
-                    penalty *= 0.7
+            # Weak phrases are less conclusive when
+            # an official job listing is confirmed.
+            if (
+                official_job_match
+                and hit["severity"] == "weak"
+            ):
+                penalty *= 0.5
 
             total_penalty += penalty
 
+        # Reduce the impact of raw penalties and
+        # cap their combined effect at -30.
         total_penalty = max(
-            total_penalty,
-            -40
+            total_penalty * 0.7,
+            -30
         )
 
         score += total_penalty
@@ -243,25 +251,35 @@ def verify_job(
             )
         )
 
+        reasons.append(
+            f"Scam indicator score adjustment: "
+            f"{total_penalty:.1f}"
+        )
+
+    # 5. Recruiter email domain
     email_result = check_email_domain(
         request.recruiter_email,
         website_result["url"]
     )
 
     if email_result["match"] is True:
-        score += 20
+        score += 8
 
         reasons.append(
             email_result["reason"]
         )
 
     elif email_result["match"] is False:
-        score -= 25
+        score -= 10
 
         reasons.append(
             email_result["reason"]
         )
 
+    # A missing email-domain result does not affect
+    # the score because there is insufficient evidence.
+
+    # 6. ML scam probability
     if ml_probability is not None:
         reasons.append(
             f"ML model predicts scam probability of "
@@ -269,52 +287,79 @@ def verify_job(
         )
 
         if ml_probability >= 0.80:
-            score -= 20
+            score -= 12
 
-        elif ml_probability >= 0.60:
-            score -= 10
+            reasons.append(
+                "High ML scam risk"
+            )
 
-        elif ml_probability >= 0.40:
-            score -= 5
+        elif ml_probability >= 0.65:
+            score -= 8
 
-    score = max(
-        0,
-        min(100, score)
+            reasons.append(
+                "Elevated ML scam risk"
+            )
+
+        elif ml_probability >= 0.55:
+            score -= 4
+
+            reasons.append(
+                "Some ML scam risk detected"
+            )
+
+    # Keep the score within 0–100
+    score = round(
+        max(0, min(100, score))
     )
 
-    if score >= 60:
+    # -----------------------------------------
+    # VERDICT
+    # -----------------------------------------
+
+    if score >= 70:
         verdict = "Likely Genuine"
 
-    elif score >= 25:
+    elif score >= 40:
         verdict = "Needs Manual Review"
 
     else:
         verdict = "Suspicious"
 
+    # -----------------------------------------
+    # RECOMMENDATION
+    # -----------------------------------------
+
     if verdict == "Likely Genuine":
         recommendation = (
-            "Proceed with caution; verify the offer "
-            "through the official company website."
+            "The available signals are encouraging. "
+            "Verify the recruiter and offer through "
+            "the official company website before proceeding."
         )
 
     elif verdict == "Needs Manual Review":
         recommendation = (
-            "Do not proceed until the job and recruiter "
-            "are manually verified."
+            "Some details remain unverified or inconsistent. "
+            "Contact the company through its official website "
+            "before sharing sensitive information or proceeding."
         )
 
     else:
         recommendation = (
-            "Avoid sharing personal information "
-            "or making payments."
+            "Significant risk indicators were detected. "
+            "Do not pay recruitment fees or share sensitive "
+            "personal or financial information."
         )
+
+    # -----------------------------------------
+    # SAVE REPORT
+    # -----------------------------------------
 
     db_report = VerificationReport(
         user_id=current_user.id,
         company=request.company,
         job_title=job_title,
         verdict=verdict,
-        confidence_score=int(score),
+        confidence_score=score,
         ml_scam_probability=ml_probability,
         reasons=" | ".join(reasons),
         website_url=website_result["url"],
@@ -336,12 +381,8 @@ def verify_job(
         company=db_report.company,
         job_title=db_report.job_title,
         verdict=db_report.verdict,
-        confidence_score=int(
-            db_report.confidence_score
-        ),
-        ml_scam_probability=(
-            db_report.ml_scam_probability
-        ),
+        confidence_score=score,
+        ml_scam_probability=db_report.ml_scam_probability,
         verified_at=db_report.created_at,
         signals=VerificationSignals(
             official_job_status=official_job_status,
@@ -349,9 +390,7 @@ def verify_job(
             career_page_exists=careers_result["exists"],
             career_page_url=careers_result["url"],
             email_matches_domain=email_result["match"],
-            scam_indicators_detected=bool(
-                scam_hits
-            )
+            scam_indicators_detected=bool(scam_hits)
         ),
         reasons=reasons,
         recommendation=recommendation

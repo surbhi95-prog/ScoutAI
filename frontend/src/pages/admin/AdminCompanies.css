@@ -1,8 +1,13 @@
+/* =============================================
+   ADMIN COMPANIES — Cosmic Glassmorphic Theme
+   ============================================= */
+
 .admin-companies-page {
-    min-height: calc(100vh - 72px);
+    min-height: calc(100vh - 68px);
     padding: 40px;
-    background: #101015;
-    color: #ffffff;
+    background: #0c0c16;
+    color: #e8eaf6;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
 .companies-header {
@@ -18,37 +23,40 @@
     font-size: 30px;
     font-weight: 700;
     letter-spacing: -0.5px;
+    color: #e8eaf6;
 }
 
 .companies-header p {
     margin: 0;
-    color: #9696a3;
+    color: rgba(184, 186, 255, 0.55);
     font-size: 14px;
 }
 
 .add-company-button {
     padding: 10px 16px;
-    border: 1px solid #5b4690;
+    border: 1px solid rgba(102, 102, 255, 0.3);
     border-radius: 8px;
-    background: #29213d;
-    color: #c5b4ff;
+    background: rgba(102, 102, 255, 0.08);
+    color: #b8baff;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    font-family: inherit;
 }
 
 .add-company-button:hover {
-    background: #35294d;
-    border-color: #7058ad;
+    background: rgba(102, 102, 255, 0.15);
+    border-color: rgba(102, 102, 255, 0.45);
 }
 
 .company-form-card {
     margin-bottom: 24px;
     padding: 26px;
-    border: 1px solid #292932;
-    border-radius: 14px;
-    background: #18181f;
+    border: 1px solid rgba(201, 232, 255, 0.12);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
 }
 
 .form-header {
@@ -63,29 +71,31 @@
     margin: 0 0 6px;
     font-size: 19px;
     font-weight: 650;
+    color: #e8eaf6;
 }
 
 .form-header p {
     margin: 0;
-    color: #777783;
+    color: rgba(184, 186, 255, 0.45);
     font-size: 13px;
 }
 
 .close-form-button {
     width: 34px;
     height: 34px;
-    border: 1px solid #34343d;
+    border: 1px solid rgba(201, 232, 255, 0.16);
     border-radius: 8px;
     background: transparent;
-    color: #9696a3;
+    color: rgba(184, 186, 255, 0.5);
     font-size: 22px;
     line-height: 1;
     cursor: pointer;
+    transition: background 0.2s, color 0.2s;
 }
 
 .close-form-button:hover {
-    background: #24242d;
-    color: #ffffff;
+    background: rgba(102, 102, 255, 0.1);
+    color: #b8baff;
 }
 
 .form-grid {
@@ -101,9 +111,9 @@
 }
 
 .form-group label {
-    color: #b8b8c2;
+    color: #b8baff;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .form-group input,
@@ -111,22 +121,29 @@
     width: 100%;
     box-sizing: border-box;
     padding: 11px 13px;
-    border: 1px solid #34343d;
+    border: 1px solid rgba(201, 232, 255, 0.15);
     border-radius: 8px;
     outline: none;
-    background: #111117;
-    color: #ffffff;
+    background: rgba(255, 255, 255, 0.04);
+    color: #e8eaf6;
     font-family: inherit;
     font-size: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-group input::placeholder {
-    color: #5f5f69;
+    color: rgba(184, 186, 255, 0.35);
 }
 
 .form-group input:focus,
 .form-group select:focus {
-    border-color: #7058ad;
+    border-color: rgba(102, 102, 255, 0.45);
+    box-shadow: 0 0 0 3px rgba(102, 102, 255, 0.1);
+}
+
+.form-group select option {
+    background: #1a1a30;
+    color: #e8eaf6;
 }
 
 .active-toggle {
@@ -135,15 +152,16 @@
     gap: 10px;
     align-self: end;
     min-height: 40px;
-    color: #b8b8c2;
+    color: #b8baff;
     font-size: 13px;
     cursor: pointer;
+    font-family: inherit;
 }
 
 .active-toggle input {
     width: 16px;
     height: 16px;
-    accent-color: #7c5ce0;
+    accent-color: #6666ff;
 }
 
 .form-actions {
@@ -152,7 +170,7 @@
     gap: 12px;
     margin-top: 26px;
     padding-top: 22px;
-    border-top: 1px solid #292932;
+    border-top: 1px solid rgba(201, 232, 255, 0.08);
 }
 
 .cancel-button,
@@ -162,50 +180,57 @@
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
+    font-family: inherit;
 }
 
 .cancel-button {
-    border: 1px solid #34343d;
+    border: 1px solid rgba(201, 232, 255, 0.16);
     background: transparent;
-    color: #a1a1ad;
+    color: rgba(184, 186, 255, 0.6);
+    transition: background 0.2s, color 0.2s;
 }
 
 .cancel-button:hover {
-    background: #24242d;
-    color: #ffffff;
+    background: rgba(102, 102, 255, 0.08);
+    color: #b8baff;
 }
 
 .save-company-button {
-    border: 1px solid #5b4690;
-    background: #7c5ce0;
+    border: 1px solid rgba(102, 102, 255, 0.35);
+    background: linear-gradient(135deg, #6666ff, #8080ff);
     color: #ffffff;
+    box-shadow: 0 4px 16px rgba(102, 102, 255, 0.28);
+    transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .save-company-button:hover {
-    background: #8a6be8;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(102, 102, 255, 0.4);
 }
 
 .save-company-button:disabled {
-    opacity: 0.6;
+    opacity: 0.5;
     cursor: not-allowed;
+    transform: none;
 }
 
 .form-error {
     margin: 0 0 20px;
     padding: 10px 12px;
-    border: 1px solid #4a3035;
+    border: 1px solid rgba(255, 100, 100, 0.22);
     border-radius: 8px;
-    background: #2a1f23;
-    color: #f08b8b;
+    background: rgba(255, 100, 100, 0.06);
+    color: #ff9090;
     font-size: 13px;
 }
 
 .companies-table-container {
     width: 100%;
     overflow-x: auto;
-    border: 1px solid #292932;
-    border-radius: 14px;
-    background: #18181f;
+    border: 1px solid rgba(201, 232, 255, 0.1);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
 }
 
 .companies-table {
@@ -217,26 +242,26 @@
 .companies-table td {
     padding: 17px 20px;
     text-align: left;
-    border-bottom: 1px solid #292932;
+    border-bottom: 1px solid rgba(201, 232, 255, 0.07);
     white-space: nowrap;
 }
 
 .companies-table th {
-    background: #1d1d25;
-    color: #9696a3;
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(184, 186, 255, 0.5);
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
 }
 
 .companies-table td {
-    color: #d6d6de;
+    color: rgba(201, 232, 255, 0.8);
     font-size: 14px;
 }
 
 .companies-table tbody tr:hover {
-    background: #1e1e27;
+    background: rgba(102, 102, 255, 0.05);
 }
 
 .companies-table tbody tr:last-child td {
@@ -244,65 +269,69 @@
 }
 
 .company-name {
-    color: #ffffff !important;
+    color: #e8eaf6 !important;
     font-weight: 600;
 }
 
 .company-status {
     display: inline-block;
     padding: 6px 10px;
-    border-radius: 7px;
+    border-radius: 8px;
     font-size: 11px;
     font-weight: 700;
 }
 
 .company-status.active {
-    background: #183326;
-    color: #70d39a;
+    background: rgba(185, 240, 215, 0.1);
+    color: #b9f0d7;
+    border: 1px solid rgba(185, 240, 215, 0.22);
 }
 
 .company-status.inactive {
-    background: #292a2f;
-    color: #8f9099;
+    background: rgba(201, 232, 255, 0.05);
+    color: rgba(201, 232, 255, 0.4);
+    border: 1px solid rgba(201, 232, 255, 0.1);
 }
 
 .edit-company-button {
     padding: 7px 12px;
-    border: 1px solid #40365c;
+    border: 1px solid rgba(102, 102, 255, 0.25);
     border-radius: 7px;
     background: transparent;
-    color: #a78bfa;
+    color: #b8baff;
     font-size: 11px;
     font-weight: 600;
     cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
 }
 
 .edit-company-button:hover {
-    background: #29213d;
+    background: rgba(102, 102, 255, 0.1);
+    border-color: rgba(102, 102, 255, 0.4);
 }
 
 .empty-state {
     padding: 70px 20px;
     text-align: center;
-    border: 1px solid #292932;
-    border-radius: 14px;
-    background: #18181f;
+    border: 1px solid rgba(201, 232, 255, 0.1);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .empty-state h3 {
     margin: 0 0 8px;
-    color: #ffffff;
+    color: #e8eaf6;
     font-size: 18px;
 }
 
 .empty-state p {
     margin: 0;
-    color: #9696a3;
+    color: rgba(184, 186, 255, 0.5);
     font-size: 14px;
 }
 
 .error-message {
-    color: #f08b8b;
+    color: #ff9090;
 }
 
 @media (max-width: 800px) {

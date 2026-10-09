@@ -1,8 +1,13 @@
+/* =============================================
+   ADMIN USERS — Cosmic Glassmorphic Theme
+   ============================================= */
+
 .admin-users-page {
-    min-height: calc(100vh - 72px);
+    min-height: calc(100vh - 68px);
     padding: 40px;
-    background: #101015;
-    color: #ffffff;
+    background: #0c0c16;
+    color: #e8eaf6;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
 .users-header {
@@ -18,20 +23,21 @@
     font-size: 30px;
     font-weight: 700;
     letter-spacing: -0.5px;
+    color: #e8eaf6;
 }
 
 .users-header p {
     margin: 0;
-    color: #9696a3;
+    color: rgba(184, 186, 255, 0.55);
     font-size: 14px;
 }
 
 .user-count {
     padding: 8px 14px;
-    border: 1px solid #302b3e;
+    border: 1px solid rgba(102, 102, 255, 0.25);
     border-radius: 20px;
-    background: #1d1a27;
-    color: #a78bfa;
+    background: rgba(102, 102, 255, 0.08);
+    color: #b8baff;
     font-size: 13px;
     font-weight: 600;
 }
@@ -39,9 +45,10 @@
 .users-table-container {
     width: 100%;
     overflow-x: auto;
-    border: 1px solid #292932;
-    border-radius: 14px;
-    background: #18181f;
+    border: 1px solid rgba(201, 232, 255, 0.1);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
 }
 
 .users-table {
@@ -53,20 +60,20 @@
 .users-table td {
     padding: 17px 20px;
     text-align: left;
-    border-bottom: 1px solid #292932;
+    border-bottom: 1px solid rgba(201, 232, 255, 0.07);
 }
 
 .users-table th {
-    background: #1d1d25;
-    color: #9696a3;
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(184, 186, 255, 0.5);
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
 }
 
 .users-table td {
-    color: #d6d6de;
+    color: rgba(201, 232, 255, 0.8);
     font-size: 14px;
 }
 
@@ -75,22 +82,22 @@
 }
 
 .users-table tbody tr {
-    transition: 0.2s ease;
+    transition: background 0.2s ease;
 }
 
 .users-table tbody tr:hover {
-    background: #1e1e27;
+    background: rgba(102, 102, 255, 0.05);
 }
 
 .user-name {
-    color: #ffffff !important;
+    color: #e8eaf6 !important;
     font-weight: 600;
 }
 
 .role-badge {
     display: inline-block;
     padding: 6px 10px;
-    border-radius: 7px;
+    border-radius: 8px;
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -98,37 +105,39 @@
 }
 
 .admin-role {
-    background: #29213d;
-    color: #a78bfa;
+    background: rgba(102, 102, 255, 0.1);
+    color: #b8baff;
+    border: 1px solid rgba(102, 102, 255, 0.22);
 }
 
 .user-role {
-    background: #20252b;
-    color: #9ba8b5;
+    background: rgba(201, 232, 255, 0.05);
+    color: rgba(201, 232, 255, 0.6);
+    border: 1px solid rgba(201, 232, 255, 0.12);
 }
 
 .empty-state {
     padding: 70px 20px;
     text-align: center;
-    border: 1px solid #292932;
-    border-radius: 14px;
-    background: #18181f;
+    border: 1px solid rgba(201, 232, 255, 0.1);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .empty-state h3 {
     margin: 0 0 8px;
-    color: #ffffff;
+    color: #e8eaf6;
     font-size: 18px;
 }
 
 .empty-state p {
     margin: 0;
-    color: #9696a3;
+    color: rgba(184, 186, 255, 0.5);
     font-size: 14px;
 }
 
 .error-message {
-    color: #f08b8b;
+    color: #ff9090;
 }
 
 @media (max-width: 900px) {
@@ -139,7 +148,7 @@
 
 @media (max-width: 600px) {
     .admin-users-page {
-        min-height: calc(100vh - 72px);
+        min-height: calc(100vh - 68px);
         padding: 24px 20px;
     }
 

@@ -36,6 +36,11 @@ function AdminNavbar() {
                 <NavLink to="/admin/companies">
                     Companies
                 </NavLink>
+
+                <NavLink to="/admin/scam-indicators">
+                    Scam Indicators
+                </NavLink>
+
             </div>
 
             <button

@@ -1,7 +1,13 @@
+/* =============================================
+   REPORT DETAILS — Cosmic Glassmorphic Theme
+   ============================================= */
+
 .report-details-container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 48px 32px;
+    font-family: 'Inter', Arial, sans-serif;
+    color: #e8eaf6;
 }
 
 .back-button {
@@ -11,7 +17,17 @@
     margin-bottom: 28px;
     cursor: pointer;
     font: inherit;
-    opacity: 0.6;
+    color: rgba(184, 186, 255, 0.6);
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.back-button:hover {
+    color: #b8baff;
 }
 
 .detail-header {
@@ -20,40 +36,49 @@
     align-items: center;
     padding: 32px;
     margin-bottom: 20px;
-    border-radius: 24px;
-    background: rgba(128, 128, 128, 0.08);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(201, 232, 255, 0.12);
+    backdrop-filter: blur(12px);
 }
 
 .detail-header h1 {
     margin: 0 0 6px;
-    font-size: 36px;
+    font-size: 34px;
+    letter-spacing: -0.5px;
+    color: #e8eaf6;
 }
 
 .detail-job-title {
     margin: 0 0 8px;
-    font-size: 18px;
-    opacity: 0.7;
+    font-size: 17px;
+    color: rgba(184, 186, 255, 0.65);
 }
 
 .detail-date {
     margin: 0;
     font-size: 13px;
-    opacity: 0.45;
+    color: rgba(184, 186, 255, 0.4);
 }
 
 .detail-score {
     padding: 18px 22px;
-    border-radius: 18px;
-    background: rgba(128, 128, 128, 0.1);
+    border-radius: 16px;
+    background: rgba(102, 102, 255, 0.08);
+    border: 1px solid rgba(102, 102, 255, 0.2);
+    text-align: center;
 }
 
 .detail-score span {
+    display: block;
     font-size: 42px;
     font-weight: 700;
+    color: #e8eaf6;
 }
 
 .detail-score small {
-    opacity: 0.5;
+    color: rgba(184, 186, 255, 0.45);
+    font-size: 13px;
 }
 
 .detail-grid {
@@ -64,13 +89,16 @@
 
 .detail-card {
     padding: 28px;
-    border-radius: 22px;
-    background: rgba(128, 128, 128, 0.08);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(201, 232, 255, 0.1);
+    backdrop-filter: blur(12px);
 }
 
 .detail-card h2 {
     margin: 0;
-    font-size: 26px;
+    font-size: 24px;
+    color: #e8eaf6;
 }
 
 .verdict-card {
@@ -88,19 +116,24 @@
 
 .detail-signals div {
     padding: 16px;
-    border-radius: 16px;
-    background: rgba(128, 128, 128, 0.08);
+    border-radius: 14px;
+    background: rgba(102, 102, 255, 0.05);
+    border: 1px solid rgba(201, 232, 255, 0.09);
 }
 
 .detail-signals span {
     display: block;
     font-size: 12px;
-    opacity: 0.5;
+    color: rgba(184, 186, 255, 0.45);
     margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
 }
 
 .detail-signals strong {
     font-size: 14px;
+    color: #e8eaf6;
 }
 
 .reasons-card {
@@ -115,18 +148,22 @@
 
 .reason-item span {
     font-weight: 700;
+    color: #6666ff;
 }
 
 .reason-item p {
     margin: 0 0 14px;
-    line-height: 1.5;
+    line-height: 1.55;
+    color: rgba(201, 232, 255, 0.8);
 }
 
 .source-row {
     display: flex;
     justify-content: space-between;
     padding: 14px 0;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+    border-bottom: 1px solid rgba(201, 232, 255, 0.08);
+    color: rgba(184, 186, 255, 0.7);
+    font-size: 14px;
 }
 
 .source-row:last-child {
@@ -136,18 +173,29 @@
 .source-row a {
     text-decoration: none;
     font-weight: 600;
+    color: #6666ff;
+    transition: color 0.2s;
+}
+
+.source-row a:hover {
+    color: #b8baff;
 }
 
 .ml-value {
     font-size: 36px;
     font-weight: 700;
     margin: 12px 0;
+    background: linear-gradient(135deg, #6666ff, #b8baff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .ml-card p:last-child {
     margin: 0;
-    opacity: 0.6;
+    color: rgba(184, 186, 255, 0.55);
     line-height: 1.5;
+    font-size: 14px;
 }
 
 @media (max-width: 800px) {
@@ -180,7 +228,7 @@
     }
 
     .detail-header h1 {
-        font-size: 28px;
+        font-size: 26px;
     }
 
     .detail-card {

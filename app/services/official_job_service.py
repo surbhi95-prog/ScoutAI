@@ -67,17 +67,22 @@ def domain_matches_company(
     hostname: str,
     company: str
 ):
+    # normalize hostname and company name
     normalized_hostname = normalize_text(hostname)
     normalized_company = normalize_text(company)
 
+    # check if company name in hostname, if yes, true
     if (
         normalized_company
         and normalized_company in normalized_hostname
     ):
         return True
 
+    # nahi tr ...
+    # split the company name into tokens(strings)
     company_tokens = [
         token
+        # find if any of token is in the hostname
         for token in re.findall(
             r"[a-zA-Z0-9]+",
             company.lower()
@@ -88,12 +93,14 @@ def domain_matches_company(
     if not company_tokens:
         return False
 
+    # atleast one token should match, or atleast half of the tokens should match
     matched_tokens = sum(
         1
         for token in company_tokens
         if token in normalized_hostname
     )
 
+    # return true if matched tokens are greater than or equal to 1
     return matched_tokens >= max(
         1,
         len(company_tokens) // 2
@@ -104,31 +111,35 @@ def get_official_careers_domain(company: str):
         api_key=os.getenv("SERPAPI_KEY")
     )
 
+    # search on google the query
     results = client.search({
         "engine": "google",
         "q": f"{company} careers jobs",
         "location": "India"
     })
 
+    # return organic results
     organic_results = results.get(
         "organic_results",
         []
     )
 
-    print("\n--- SERPAPI CAREERS RESULTS ---")
-    for result in organic_results[:10]:
-        print(
-            "TITLE:", result.get("title"),
-            "| LINK:", result.get("link"),
-            "| SNIPPET:", result.get("snippet")
-        )
-    print("--- END RESULTS ---\n")
+    # print("\n--- SERPAPI CAREERS RESULTS ---")
+    # for result in organic_results[:10]:
+    #     print(
+    #         "TITLE:", result.get("title"),
+    #         "| LINK:", result.get("link"),
+    #         "| SNIPPET:", result.get("snippet")
+    #     )
+    # print("--- END RESULTS ---\n")
 
+    # normalize company_name
     company_normalized = normalize_text(company)
 
     best_candidate = None
     best_score = 0
 
+    # find out link, title, snippet from the organic results for each company
     for result in organic_results:
         link = result.get("link", "")
         title = result.get("title", "")
@@ -151,14 +162,20 @@ def get_official_careers_domain(company: str):
         normalized_snippet = normalize_text(snippet)
         normalized_link = normalize_text(link)
 
+        # check if company name in job title
         company_in_title = (
             company_normalized in normalized_title
         )
 
+        # check if company name in snippet
         company_in_snippet = (
             company_normalized in normalized_snippet
         )
 
+        # tokeninze the company name
+        # extract hostname
+        # check if company name present in host name for each token
+        # min 1 token should have hostname 
         domain_matches = domain_matches_company(
             hostname,
             company
@@ -222,6 +239,7 @@ def discover_ats_domains(careers_url: str):
         return []
 
     try:
+        # finnd the career_urls from the req
         response = requests.get(
             careers_url,
             timeout=8,
@@ -235,13 +253,18 @@ def discover_ats_domains(careers_url: str):
 
         html = response.text
 
+        # find all <a> tags and extract href attributes
         links = re.findall(
             r'href=["\']([^"\']+)["\']',
             html,
             re.IGNORECASE
         )
 
+        # returns unique URLs since it is a set
+        # collect all urls as a set
         ats_domains = set()
+
+        # joins extracted link with the base URL to form an absolute URL
 
         for link in links:
             absolute_url = urljoin(
@@ -249,6 +272,7 @@ def discover_ats_domains(careers_url: str):
                 link
             )
 
+            # find the hostname of the abs url
             hostname = urlparse(
                 absolute_url
             ).hostname
@@ -292,14 +316,14 @@ def search_job_on_domain(
         []
     )
 
-    print("\n--- SERPAPI JOB RESULTS ---")
-    for result in organic_results[:10]:
-        print(
-            "TITLE:", result.get("title"),
-            "| LINK:", result.get("link"),
-            "| SNIPPET:", result.get("snippet")
-        )
-    print("--- END JOB RESULTS ---\n")
+    # print("\n--- SERPAPI JOB RESULTS ---")
+    # for result in organic_results[:10]:
+    #     print(
+    #         "TITLE:", result.get("title"),
+    #         "| LINK:", result.get("link"),
+    #         "| SNIPPET:", result.get("snippet")
+        # )
+    # print("--- END JOB RESULTS ---\n")
 
     best_match = None
     best_score = 0
@@ -428,6 +452,7 @@ def search_official_job(
 ):
     job_title = job_title.strip()
 
+    # Used Serpapi and tokens
     careers = get_official_careers_domain(
         company
     )

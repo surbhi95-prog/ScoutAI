@@ -1,38 +1,41 @@
 import re
 
-SCAM_PATTERNS = [
-    # Strong indicators
-    (r'registration\s+fee', -40, 'strong'),
-    (r'processing\s+fee', -40, 'strong'),
-    (r'training\s+fee', -35, 'strong'),
-    (r'pay\s+before\s+interview', -50, 'strong'),
-    (r'security\s+deposit', -35, 'strong'),
+from fastapi import HTTPException
+from sqlalchemy.orm import Session
 
-    # Medium indicators
-    (r'telegram\s+interview', -15, 'medium'),
-    (r'whatsapp\s+interview', -15, 'medium'),
+from app.models.scam_indicator import ScamIndicator
 
-    # Weak indicators
-    (r'urgent\s+(hiring|joining|joinee|joiner|requirement)', -5, 'weak'),
-    (r'immediate\s+(joiner|joining|joinee)', -5, 'weak'),
-    (r'limited\s+seats?', -5, 'weak'),
-]
-def detect_scam_keywords(text: str | None):
+def detect_scam_keywords(
+    text: str | None,
+    db: Session
+):
     if not text:
         return []
 
-    text_lower = re.sub(r'[^a-z0-9\s]', ' ', text.lower())
+    text_lower = text.lower()
+
+    indicators = (
+        db.query(ScamIndicator)
+        .filter(ScamIndicator.is_active.is_(True))
+        .all()
+    )
 
     found = []
 
-    for pattern, penalty, severity in SCAM_PATTERNS:
-        match = re.search(pattern, text_lower)
+    for indicator in indicators:
+        try:
+            match = re.search(
+                indicator.pattern,
+                text_lower
+            )
+        except re.error:
+            continue
 
         if match:
             found.append({
-                'keyword': match.group(0),
-                'penalty': penalty,
-                'severity': severity
+                "keyword": match.group(0),
+                "penalty": indicator.penalty,
+                "severity": indicator.severity
             })
 
     return found

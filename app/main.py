@@ -29,7 +29,7 @@ app.include_router(verification_router) # we are saying that all the endpoints i
                                         # here we took only verification_router
 app.include_router(company_router)
 app.include_router(admin.router)
-
+# app.include_router(scam_indicators.router)
 
 @app.on_event("startup")
 def on_startup():

@@ -15,7 +15,8 @@ import AdminLayout from './pages/admin/AdminLayout';
 import AdminReports from './pages/admin/AdminReports';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminDashboard from './pages/admin/AdminDashboard';
-import AdminCompanies from './pages/AdminCompanies';
+import AdminCompanies from './pages/admin/AdminCompanies';
+import AdminScamIndicators from './pages/admin/AdminScamIndicators';
 import ProtectedAdminRoute from './components/ProtectedAdminRoute';
 function App() {
   return (
@@ -105,6 +106,11 @@ function App() {
             <Route
               path="companies"
               element={<AdminCompanies />}
+            />
+
+            <Route
+              path="scam-indicators"
+              element={<AdminScamIndicators />}
             />
 
         </Route>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getProfile, updateProfile } from "../services/api";
 import "./Profile.css";
+import Navbar from "../components/Navbar";
 
 function Profile() {
     const [profile, setProfile] = useState(null);
@@ -88,8 +89,9 @@ function Profile() {
     });
 
     return (
+        <>
+        <Navbar />
         <div className="profile-page">
-
             <div className="profile-container">
 
                 <div className="profile-header">
@@ -266,6 +268,7 @@ function Profile() {
             </div>
 
         </div>
+    </>
     );
 }
 

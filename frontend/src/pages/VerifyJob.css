@@ -1,7 +1,12 @@
+/* =============================================
+   VERIFY JOB PAGE — Cosmic Glassmorphic Theme
+   ============================================= */
+
 .verify-page {
     min-height: 100vh;
-    background: #0b1120;
-    color: #ffffff;
+    background: #0c0c16;
+    color: #e8eaf6;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
 .verify-container {
@@ -17,11 +22,13 @@
 .verify-header h1 {
     margin: 0 0 8px;
     font-size: 32px;
+    letter-spacing: -0.5px;
+    color: #e8eaf6;
 }
 
 .verify-header p {
     margin: 0;
-    color: #9ca3af;
+    color: rgba(184, 186, 255, 0.6);
 }
 
 .verify-grid {
@@ -32,10 +39,12 @@
 }
 
 .verify-card {
-    background: #111827;
-    border: 1px solid #1f2937;
-    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(201, 232, 255, 0.12);
+    border-radius: 18px;
     padding: 28px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .card-heading {
@@ -44,12 +53,13 @@
 
 .card-heading h2 {
     margin: 0 0 7px;
-    font-size: 21px;
+    font-size: 20px;
+    color: #e8eaf6;
 }
 
 .card-heading p {
     margin: 0;
-    color: #9ca3af;
+    color: rgba(184, 186, 255, 0.55);
     font-size: 14px;
 }
 
@@ -63,35 +73,36 @@
 .mode-button {
     flex: 1;
     padding: 11px 15px;
-    border: 1px solid #374151;
+    border: 1px solid rgba(201, 232, 255, 0.14);
     border-radius: 8px;
     background: transparent;
-    color: #9ca3af;
+    color: rgba(184, 186, 255, 0.55);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
+    font-family: inherit;
 }
 
 .mode-button:hover {
-    border-color: #6b7280;
-    color: #ffffff;
+    border-color: rgba(102, 102, 255, 0.35);
+    color: #b8baff;
 }
 
 .mode-button.active {
-    background: #1f2937;
-    border-color: #6b7280;
-    color: #ffffff;
+    background: rgba(102, 102, 255, 0.1);
+    border-color: rgba(102, 102, 255, 0.4);
+    color: #b8baff;
 }
 
 .mode-or {
-    color: #6b7280;
+    color: rgba(184, 186, 255, 0.35);
     font-size: 13px;
 }
 
 .form-error {
     margin: -12px 0 20px;
-    color: #fca5a5;
+    color: #ff9090;
     font-size: 14px;
     line-height: 1.5;
 }
@@ -105,11 +116,11 @@
     margin-bottom: 8px;
     font-size: 13px;
     font-weight: 600;
-    color: #d1d5db;
+    color: #b8baff;
 }
 
 .form-group label span {
-    color: #6b7280;
+    color: rgba(184, 186, 255, 0.4);
     font-weight: 400;
 }
 
@@ -118,14 +129,14 @@
     width: 100%;
     box-sizing: border-box;
     padding: 12px 13px;
-    border: 1px solid #374151;
+    border: 1px solid rgba(201, 232, 255, 0.14);
     border-radius: 8px;
-    background: #0f172a;
-    color: #ffffff;
+    background: rgba(255, 255, 255, 0.04);
+    color: #e8eaf6;
     font-family: inherit;
     font-size: 14px;
     outline: none;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-group input {
@@ -140,12 +151,13 @@
 
 .form-group input:focus,
 .form-group textarea:focus {
-    border-color: #6b7280;
+    border-color: rgba(102, 102, 255, 0.45);
+    box-shadow: 0 0 0 3px rgba(102, 102, 255, 0.1);
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-    color: #6b7280;
+    color: rgba(184, 186, 255, 0.35);
 }
 
 .image-upload-input {
@@ -158,22 +170,27 @@
     padding: 7px 10px;
     border: 0;
     border-radius: 6px;
-    background: #1f2937;
-    color: #ffffff;
+    background: rgba(102, 102, 255, 0.12);
+    color: #b8baff;
     font: inherit;
     cursor: pointer;
+    transition: background 0.2s;
+}
+
+.image-upload-input::file-selector-button:hover {
+    background: rgba(102, 102, 255, 0.2);
 }
 
 .image-upload-help,
 .selected-image-name {
     margin: 9px 0 0;
-    color: #9ca3af;
+    color: rgba(184, 186, 255, 0.5);
     font-size: 13px;
     line-height: 1.5;
 }
 
 .selected-image-name {
-    color: #d1d5db;
+    color: #b8baff;
     overflow-wrap: anywhere;
 }
 
@@ -187,17 +204,20 @@
     padding: 13px 16px;
     border: none;
     border-radius: 8px;
-    background: #ffffff;
-    color: #111827;
+    background: linear-gradient(135deg, #6666ff, #8080ff);
+    color: #ffffff;
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
+    box-shadow: 0 6px 20px rgba(102, 102, 255, 0.3);
+    font-family: inherit;
 }
 
 .extract-button:hover:not(:disabled),
 .verify-button:hover {
-    background: #e5e7eb;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 28px rgba(102, 102, 255, 0.45);
 }
 
 .extract-button:disabled {
@@ -226,29 +246,31 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 18px;
-    border: 1px solid #374151;
+    border: 1px solid rgba(201, 232, 255, 0.16);
     border-radius: 50%;
-    color: #9ca3af;
+    color: rgba(184, 186, 255, 0.45);
     font-size: 24px;
 }
 
 .report-label {
     margin: 0 0 8px;
-    color: #6b7280;
+    color: #6666ff;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1.5px;
+    text-transform: uppercase;
 }
 
 .report-empty h2 {
     margin: 0 0 10px;
     font-size: 22px;
+    color: #e8eaf6;
 }
 
 .report-empty > p:last-child {
     max-width: 300px;
     margin: 0;
-    color: #6b7280;
+    color: rgba(184, 186, 255, 0.45);
     font-size: 14px;
     line-height: 1.6;
 }
@@ -262,12 +284,13 @@
     justify-content: space-between;
     align-items: center;
     padding-bottom: 25px;
-    border-bottom: 1px solid #1f2937;
+    border-bottom: 1px solid rgba(201, 232, 255, 0.1);
 }
 
 .report-top h2 {
     margin: 0;
     font-size: 24px;
+    color: #e8eaf6;
 }
 
 .score {
@@ -282,7 +305,7 @@
 
 .score small {
     margin-left: 3px;
-    color: #6b7280;
+    color: rgba(184, 186, 255, 0.45);
 }
 
 .signal-grid {
@@ -294,33 +317,34 @@
 
 .signal-item {
     padding: 15px;
-    border: 1px solid #1f2937;
-    border-radius: 8px;
-    background: #0f172a;
+    border: 1px solid rgba(201, 232, 255, 0.1);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .signal-item span {
     display: block;
     margin-bottom: 6px;
-    color: #6b7280;
+    color: rgba(184, 186, 255, 0.45);
     font-size: 12px;
 }
 
 .signal-item strong {
     font-size: 14px;
+    color: #e8eaf6;
 }
 
 .recommendation {
     margin-top: 25px;
     padding: 18px;
-    border: 1px solid #1f2937;
-    border-radius: 8px;
-    background: #0f172a;
+    border: 1px solid rgba(201, 232, 255, 0.1);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .recommendation p:last-child {
     margin: 0;
-    color: #d1d5db;
+    color: rgba(201, 232, 255, 0.8);
     font-size: 14px;
     line-height: 1.6;
 }

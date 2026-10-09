@@ -3,7 +3,7 @@ import {
     getAdminCompanies,
     addAdminCompany,
     updateAdminCompany
-} from "../services/api";
+} from "../../services/api";
 
 import "./AdminCompanies.css";
 

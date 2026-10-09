@@ -1,3 +1,7 @@
+/* =============================================
+   LOGIN PAGE — Cosmic Glassmorphic Theme
+   ============================================= */
+
 * {
   box-sizing: border-box;
 }
@@ -8,70 +12,51 @@
   justify-content: center;
   align-items: center;
   padding: 40px 20px;
-
-  background: linear-gradient(145deg,
-      #11121d 0%,
-      #3f458a 35%,
-      #e9d985 110%,
-      #3f458a 100%);
-
-  font-family: Arial, Helvetica, sans-serif;
+  background: #0c0c16;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(102, 102, 255, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(185, 240, 215, 0.08) 0%, transparent 50%);
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
-
 
 /* =========================================
    MAIN AUTH CARD
-========================================= */
+   ========================================= */
 
 .login-card {
   width: 100%;
   max-width: 940px;
   min-height: 680px;
-
   position: relative;
-
   display: grid;
   grid-template-columns: 1fr 1fr;
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(12px);
-
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 16px;
-
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(201, 232, 255, 0.14);
+  border-radius: 20px;
+  box-shadow:
+    0 0 0 1px rgba(102, 102, 255, 0.1),
+    0 24px 80px rgba(0, 0, 0, 0.55);
   overflow: hidden;
 }
 
-
 /* =========================================
    LEFT BRAND SECTION
-========================================= */
+   ========================================= */
 
 .login-brand {
-  margin: 20px;
-  padding: 30px;
-
+  margin: 18px;
+  padding: 32px;
   border-radius: 14px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   color: white;
-
   background:
-    radial-gradient(circle at 15% 10%,
-      #e9d985 0%,
-      transparent 35%),
-    radial-gradient(circle at 50% 45%,
-      #3f458a 100%,
-      transparent 55%),
-    linear-gradient(145deg,
-      #11121d 100%,
-      #bd20ed);
-
+    radial-gradient(circle at 15% 10%, rgba(102, 102, 255, 0.4) 0%, transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(185, 240, 215, 0.15) 0%, transparent 50%),
+    linear-gradient(145deg, #10102a 0%, #1a1a40 100%);
+  border: 1px solid rgba(201, 232, 255, 0.12);
   position: relative;
   z-index: 5;
 }
@@ -81,87 +66,82 @@
 }
 
 .brand-small {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 600;
   margin-bottom: 12px;
+  color: #b8baff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .login-brand h1 {
-  font-size: 48px;
+  font-size: 46px;
   margin: 0 0 18px;
   letter-spacing: -2px;
+  background: linear-gradient(135deg, #6666ff, #b8baff, #b9f0d7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .brand-description {
   max-width: 280px;
-  font-size: 17px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(232, 234, 246, 0.8);
 }
 
 .brand-bottom {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   margin: 0;
+  color: rgba(185, 240, 215, 0.7);
 }
-
 
 /* =========================================
    AUTH PANELS
-========================================= */
+   ========================================= */
 
 .auth-panel {
   position: absolute;
-
   top: 0;
   right: 0;
-
   width: 50%;
   height: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   padding: 35px;
-
-  background: rgba(255, 255, 255, 0.08);
-
+  background: rgba(255, 255, 255, 0.035);
   transition:
     transform 0.65s cubic-bezier(0.77, 0, 0.175, 1),
     opacity 0.45s ease;
-
   overflow-y: auto;
 }
 
-
 /* =========================================
    LOGIN PANEL
-========================================= */
+   ========================================= */
 
 .login-panel {
   transform: translateX(0);
   opacity: 1;
-
   z-index: 3;
 }
 
-
 /* =========================================
    SIGNUP PANEL
-========================================= */
+   ========================================= */
 
 .signup-panel {
   transform: translateX(100%);
   opacity: 0;
-
   z-index: 2;
 }
 
-
 /* =========================================
    WHEN SIGNUP IS ACTIVE
-========================================= */
+   ========================================= */
 
 .login-card.show-signup .login-panel {
   transform: translateX(-100%);
@@ -171,14 +151,12 @@
 .login-card.show-signup .signup-panel {
   transform: translateX(0);
   opacity: 1;
-
   z-index: 4;
 }
 
-
 /* =========================================
    FORM CONTAINERS
-========================================= */
+   ========================================= */
 
 .login-form-container,
 .signup-form-container {
@@ -186,56 +164,45 @@
   max-width: 310px;
 }
 
-
 /* =========================================
    ICON
-========================================= */
+   ========================================= */
 
 .login-icon {
   width: 44px;
   height: 44px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background: #dedede;
-
-  border-radius: 50%;
-
+  background: rgba(102, 102, 255, 0.15);
+  border: 1px solid rgba(102, 102, 255, 0.3);
+  border-radius: 12px;
   font-size: 21px;
-
   margin-bottom: 18px;
 }
 
-
 /* =========================================
    HEADINGS
-========================================= */
+   ========================================= */
 
 .login-form-container h2,
 .signup-form-container h2 {
   margin: 0;
-
-  font-size: 29px;
-
-  color: #111111;
+  font-size: 27px;
+  color: #e8eaf6;
+  letter-spacing: -0.5px;
 }
 
 .login-subtitle {
-  margin: 12px 0 35px;
-
-  color: white;
-
+  margin: 12px 0 30px;
+  color: rgba(184, 186, 255, 0.6);
   font-size: 14px;
-
-  line-height: 1.5;
+  line-height: 1.55;
 }
-
 
 /* =========================================
    FORM
-========================================= */
+   ========================================= */
 
 .login-form-container form,
 .signup-form-container form {
@@ -243,33 +210,27 @@
   flex-direction: column;
 }
 
-
 /* =========================================
    LABELS
-========================================= */
+   ========================================= */
 
 .login-form-container label,
 .signup-form-container label {
-  font-size: 14px;
-
-  font-weight: 700;
-
-  margin-bottom: 10px;
-
-  color: #161616;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #b8baff;
 }
 
 .login-form-container label span,
 .signup-form-container label span {
-  color: #e32626;
-
+  color: #ff7070;
   margin-left: 2px;
 }
 
-
 /* =========================================
    INPUTS
-========================================= */
+   ========================================= */
 
 .login-form-container input[type="email"],
 .login-form-container input[type="text"],
@@ -278,309 +239,231 @@
 .signup-form-container input[type="email"],
 .signup-form-container input[type="password"] {
   width: 100%;
-
-  height: 40px;
-
-  padding: 0 12px;
-
-  border: 1px solid #888888;
-
+  height: 42px;
+  padding: 0 13px;
+  border: 1px solid rgba(201, 232, 255, 0.16);
   border-radius: 8px;
-
   font-size: 14px;
-
   outline: none;
-
-  margin-bottom: 20px;
-
-  background: white;
+  margin-bottom: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #e8eaf6;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Remove bottom margin when input is inside the password wrapper
-   — the wrapper itself carries the spacing */
+.login-form-container input::placeholder,
+.signup-form-container input::placeholder {
+  color: rgba(184, 186, 255, 0.4);
+}
+
+/* Remove bottom margin when input is inside the password wrapper */
 .password-input-wrapper input {
   margin-bottom: 0 !important;
 }
 
 .login-form-container input:focus,
 .signup-form-container input:focus {
-  border-color: #3f458a;
-
-  box-shadow:
-    0 0 0 3px rgba(59, 40, 216, 0.12);
+  border-color: rgba(102, 102, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(102, 102, 255, 0.12);
 }
-
 
 /* =========================================
    PASSWORD HEADER
-========================================= */
+   ========================================= */
 
 .password-heading {
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
 }
 
 .password-heading label {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .forgot-password {
   border: none;
-
   background: none;
-
-  color: #3f458a;
-
+  color: #6666ff;
   font-size: 12px;
-
   cursor: pointer;
-
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  transition: color 0.2s;
 }
 
+.forgot-password:hover {
+  color: #b8baff;
+}
 
 /* =========================================
    MAIN BUTTON
-========================================= */
+   ========================================= */
 
 .login-button {
-  height: 40px;
-
+  height: 42px;
   border: none;
-
   border-radius: 8px;
-
-  background: #3f458a;
-
+  background: linear-gradient(135deg, #6666ff, #8080ff);
   color: white;
-
   font-size: 15px;
-
   font-weight: 700;
-
   cursor: pointer;
-
   margin-top: 3px;
-
-  box-shadow:
-    0 6px 15px rgba(52, 36, 208, 0.25);
-
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+  box-shadow: 0 6px 20px rgba(102, 102, 255, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .login-button:hover {
-  background: #39337a;
-
   transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(102, 102, 255, 0.48);
 }
-
 
 /* =========================================
    DIVIDER
-========================================= */
+   ========================================= */
 
 .divider {
   display: flex;
-
   align-items: center;
-
   gap: 8px;
-
-  margin: 22px 0;
+  margin: 20px 0;
 }
 
 .divider span {
   flex: 1;
-
   height: 1px;
-
-  background: #777777;
+  background: rgba(201, 232, 255, 0.12);
 }
 
 .divider p {
   margin: 0;
-
   white-space: nowrap;
-
   font-size: 12px;
-
-  color: #555555;
+  color: rgba(184, 186, 255, 0.45);
 }
-
 
 /* =========================================
    SOCIAL BUTTONS
-========================================= */
+   ========================================= */
 
 .social-buttons {
   display: flex;
-
   justify-content: center;
-
-  gap: 18px;
+  gap: 16px;
 }
 
 .social-buttons button {
   width: 76px;
-
   height: 36px;
-
-  border: 1px solid #888888;
-
+  border: 1px solid rgba(201, 232, 255, 0.16);
   border-radius: 8px;
-
-  background: white;
-
+  background: rgba(255, 255, 255, 0.05);
+  color: #e8eaf6;
   font-size: 17px;
-
   font-weight: 700;
-
   cursor: pointer;
-
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .social-buttons button:hover {
-  background: #f4f4f4;
-
+  background: rgba(102, 102, 255, 0.1);
   transform: translateY(-1px);
 }
 
-
 /* =========================================
    SIGNUP / LOGIN SWITCH TEXT
-========================================= */
+   ========================================= */
 
 .signup-text {
   text-align: center;
-
   font-size: 14px;
-
-  color: #222222;
-
-  margin-top: 25px;
+  color: rgba(184, 186, 255, 0.55);
+  margin-top: 22px;
 }
 
 .signup-text button {
   border: none;
-
   background: none;
-
-  color: #3f458a;
-
+  color: #6666ff;
   font-weight: 700;
-
   cursor: pointer;
-
   font-size: 14px;
+  transition: color 0.2s;
 }
 
 .signup-text button:hover {
+  color: #b8baff;
   text-decoration: underline;
 }
 
-
 /* =========================================
    TERMS CHECKBOX
-========================================= */
+   ========================================= */
 
 .terms {
   display: flex !important;
-
   align-items: flex-start;
-
   gap: 8px;
-
   margin-top: -5px;
-
   margin-bottom: 18px !important;
-
   font-size: 12px !important;
-
   font-weight: 500 !important;
-
   cursor: pointer;
+  color: rgba(184, 186, 255, 0.6) !important;
 }
 
 .terms input[type="checkbox"] {
   width: 15px;
-
   height: 15px;
-
   margin: 0;
-
   flex-shrink: 0;
-
   cursor: pointer;
+  accent-color: #6666ff;
 }
 
 .terms span {
-  color: #333 !important;
-
+  color: rgba(184, 186, 255, 0.6) !important;
   margin: 0 !important;
 }
 
-
 /* =========================================
    MOBILE
-========================================= */
+   ========================================= */
 
 @media (max-width: 700px) {
-
   .login-page {
     padding: 20px 12px;
-
     align-items: center;
   }
 
   .login-card {
     max-width: 430px;
-
     min-height: 700px;
-
     display: block;
   }
 
-
   /* Hide branding on mobile */
-
   .login-brand {
     display: none;
   }
 
-
   /* Both panels become full width */
-
   .auth-panel {
     width: 100%;
-
     padding: 30px 25px;
   }
 
-
   /* Login */
-
   .login-panel {
     transform: translateX(0);
   }
 
-
   /* Signup */
-
   .signup-panel {
     transform: translateX(100%);
   }
 
-
   /* Signup active */
-
   .login-card.show-signup .login-panel {
     transform: translateX(-100%);
   }
@@ -588,13 +471,12 @@
   .login-card.show-signup .signup-panel {
     transform: translateX(0);
   }
-
 }
 
 .password-input-wrapper {
   position: relative;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .password-input-wrapper input {
@@ -606,34 +488,29 @@
 .password-toggle {
   position: absolute;
   right: 6px;
-  top: 20px;
-  /* half of the 40px input height */
+  top: 21px;
   transform: translateY(-50%);
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 28px;
   height: 28px;
   border-radius: 6px;
-
   border: none;
   background: transparent;
   cursor: pointer;
   padding: 0;
-
-  color: #9ca3af;
+  color: rgba(184, 186, 255, 0.45);
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .password-toggle:hover {
-  color: rgb(141, 141, 141);
-  background-color: rgba(99, 102, 241, 0.08);
+  color: #b8baff;
+  background-color: rgba(102, 102, 255, 0.1);
 }
 
 .password-toggle:focus-visible {
-  outline: 2px solid #6366f1;
+  outline: 2px solid #6666ff;
   outline-offset: 1px;
 }
 

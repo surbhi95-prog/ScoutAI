@@ -1,4 +1,31 @@
-* {
+/* =============================================
+   SCOUTAI GLOBAL DESIGN SYSTEM
+   Theme: Cosmic Glassmorphic
+   ============================================= */
+
+/* --- Design Tokens --- */
+:root {
+  --bg:         #0c0c16;   /* Rich Black */
+  --accent:     #6666ff;   /* Medium Slate Blue */
+  --accent-hi:  #b8baff;   /* Periwinkle */
+  --border-col: #c9e8ff;   /* Columbia Blue */
+  --cta:        #b9f0d7;   /* Celadon */
+  --text:       #e8eaf6;
+  --text-muted: rgba(184, 186, 255, 0.6);
+
+  /* Glass surface */
+  --glass-bg:     rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(201, 232, 255, 0.14);
+  --glass-blur:   blur(12px);
+
+  /* Shadows */
+  --shadow-sm:  0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-md:  0 8px 40px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 40px rgba(102, 102, 255, 0.12);
+}
+
+/* --- Reset --- */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -9,9 +36,11 @@ html {
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #1A334A;
-  color: #C1D1CF;
+  font-family: 'Inter', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
 }
 
 button {
@@ -20,46 +49,106 @@ button {
   border: none;
 }
 
-/* Gradient Background */
-.landing { 
-  min-height: 100vh;
-  /* background: */
-    /* radial-gradient(circle at 80% 20%, red, transparent 30%),
-    radial-gradient(circle at 20% 70%, #1A334A, transparent 30%), */
-    /* linear-gradient(to bottom, #C5979D, #2B193D); */
-    /* #1A334A; */
-    /* background: linear-gradient(
-      135deg,
-      #222e50 0%,
-      #007991 35%,
-      #439a86 70%,
-      #e9d985 100%
-      ); */
-      background: linear-gradient(
-      123deg,
-      #11121d 0%,
-      #3f458a 35%,
-      /* white 70%, */
-      #e9d985 100%,
-      #3f458a 100%
-      );
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-/* NAVBAR */
+/* =============================================
+   GLOBAL UTILITY CLASSES
+   ============================================= */
+
+/* Glass card surface */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm), var(--shadow-glow);
+}
+
+/* Accent gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hi));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Primary CTA Button */
+.btn-primary {
+  padding: 13px 26px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), #8080ff);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 20px rgba(102, 102, 255, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(102, 102, 255, 0.5);
+}
+
+/* Secondary ghost Button */
+.btn-secondary {
+  padding: 13px 26px;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  color: var(--accent-hi);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(102, 102, 255, 0.08);
+  border-color: rgba(102, 102, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+/* =============================================
+   NAVBAR (legacy index.css classes — kept for compatibility)
+   ============================================= */
+
+.landing {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
 
 .navbar {
-  height: 80px;
+  height: 68px;
   padding: 0 7%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #171F22;
+  background: rgba(12, 12, 22, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .logo {
-  font-size: 25px;
-  font-weight: 700;
-  letter-spacing: -1px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hi));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .nav-links {
@@ -69,37 +158,44 @@ button {
 }
 
 .nav-links a {
-  color: #a9afc3;
+  color: var(--text-muted);
   text-decoration: none;
   font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
 }
 
 .nav-links a:hover {
-  color: white;
+  color: var(--accent-hi);
 }
 
 .login-btn {
   background: transparent;
-  color: white;
+  color: var(--text);
   font-size: 14px;
 }
 
 .signup-btn,
 .primary-btn {
-  background: #222e50;
+  background: linear-gradient(135deg, var(--accent), #8080ff);
   color: white;
-  padding: 13px 22px;
+  padding: 10px 20px;
   border-radius: 9px;
-  font-weight: 600;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 4px 16px rgba(102, 102, 255, 0.3);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .signup-btn:hover,
 .primary-btn:hover {
-  background: #222e50;
+  box-shadow: 0 8px 24px rgba(102, 102, 255, 0.5);
+  transform: translateY(-1px);
 }
 
-
-/* HERO */
+/* =============================================
+   HERO
+   ============================================= */
 
 .hero {
   min-height: 650px;
@@ -116,70 +212,85 @@ button {
 
 .badge {
   display: inline-block;
-  padding: 8px 14px;
-  border: 1px solid rgba(99, 102, 241, 0.4);
+  padding: 7px 14px;
+  border: 1px solid rgba(102, 102, 255, 0.35);
   border-radius: 30px;
-  color: #a5b4fc;
-  background: rgba(79, 70, 229, 0.1);
+  color: var(--accent-hi);
+  background: rgba(102, 102, 255, 0.08);
   font-size: 13px;
+  font-weight: 600;
   margin-bottom: 25px;
 }
 
 .hero h1 {
-  font-size: clamp(45px, 5vw, 72px);
+  font-size: clamp(42px, 5vw, 70px);
   line-height: 1.05;
   letter-spacing: -3px;
-  margin-bottom: 25px;
+  margin-bottom: 22px;
 }
 
 .hero h1 span {
-  color: #e9d985;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hi));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hero-content > p {
-  color: white;
-  font-size: 18px;
+  color: var(--text-muted);
+  font-size: 17px;
   line-height: 1.7;
-  max-width: 580px;
+  max-width: 560px;
 }
 
 .hero-buttons {
   display: flex;
-  gap: 15px;
+  gap: 14px;
   margin-top: 35px;
 }
 
 .secondary-btn {
   padding: 13px 22px;
   border-radius: 9px;
-  background: rgba(255, 255, 255, 0.06);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--glass-bg);
+  color: var(--accent-hi);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  font-weight: 600;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
 }
 
+.secondary-btn:hover {
+  background: rgba(102, 102, 255, 0.08);
+  border-color: rgba(102, 102, 255, 0.3);
+  transform: translateY(-1px);
+}
 
-/* TRUST CARD */
+/* =============================================
+   TRUST CARD
+   ============================================= */
 
 .trust-card {
   width: 370px;
   padding: 28px;
-  border-radius: 18px;
-  background: rgba(250, 238, 170, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
-  /* backdrop-filter: blur(15px); */
+  border-radius: 20px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-md), var(--shadow-glow);
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   font-size: 11px;
-  color: #e9d985;
+  color: var(--accent-hi);
   letter-spacing: 1px;
 }
 
 .verified {
-  color: rgb(16, 96, 82);
+  color: var(--cta);
 }
 
 .score-section {
@@ -188,13 +299,16 @@ button {
 }
 
 .score {
-  font-size: 75px;
+  font-size: 72px;
   font-weight: 700;
-  color: #222e50;
+  background: linear-gradient(135deg, var(--cta), #6ce4b4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .score-label {
-  color: #222e50;
+  color: var(--text-muted);
   font-size: 12px;
   letter-spacing: 2px;
 }
@@ -203,8 +317,9 @@ button {
   text-align: center;
   padding: 12px;
   border-radius: 8px;
-  background: rgba(52, 211, 153, 0.1);
-  color: #fffadf;
+  background: rgba(185, 240, 215, 0.08);
+  border: 1px solid rgba(185, 240, 215, 0.2);
+  color: var(--cta);
   font-weight: 600;
 }
 
@@ -213,12 +328,13 @@ button {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  color: #c7cada;
+  color: var(--text-muted);
   font-size: 14px;
 }
 
-
-/* HOW IT WORKS */
+/* =============================================
+   HOW IT WORKS
+   ============================================= */
 
 .how-it-works {
   padding: 100px 7%;
@@ -228,13 +344,13 @@ button {
 .how-it-works h2,
 .cta-section h2 {
   font-size: 40px;
-  color: #222e50;
+  color: var(--text);
   letter-spacing: -1px;
 }
 
 .section-subtitle {
   margin-top: 15px;
-  color: #e9d985;
+  color: var(--text-muted);
 }
 
 .feature-grid {
@@ -242,47 +358,59 @@ button {
   margin: 55px auto 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
+  gap: 22px;
 }
 
 .feature-card {
-  padding: 35px 28px;
+  padding: 32px 26px;
   text-align: left;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(102, 102, 255, 0.3);
+  box-shadow: 0 12px 40px rgba(102, 102, 255, 0.12);
 }
 
 .feature-icon {
-  font-size: 30px;
-  margin-bottom: 20px;
+  font-size: 28px;
+  margin-bottom: 18px;
 }
 
 .feature-card h3 {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  color: var(--text);
 }
 
 .feature-card p {
-  color: white;
+  color: var(--text-muted);
   line-height: 1.6;
+  font-size: 14px;
 }
 
-
-/* CTA */
+/* =============================================
+   CTA SECTION
+   ============================================= */
 
 .cta-section {
   padding: 110px 20px;
   text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid var(--glass-border);
 }
 
 .cta-section p {
-  color: #e9d985;
+  color: var(--text-muted);
   margin: 15px 0 30px;
 }
 
-
-/* RESPONSIVE */
+/* =============================================
+   RESPONSIVE
+   ============================================= */
 
 @media (max-width: 900px) {
   .hero {
@@ -313,7 +441,7 @@ button {
   }
 
   .signup-btn {
-    padding: 10px 15px;
+    padding: 9px 14px;
   }
 
   .hero {
